@@ -1,0 +1,53 @@
+.input {
+  display: block;
+  padding: rem(5px) rem(10px);
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  background: var(--color-background-input);
+  transition: border-color .3s ease;
+
+  &-focus {
+    border-color: var(--color-primary);
+  }
+
+  &-round {
+    border-radius: rem(8px);
+  }
+
+  &-mbsmall {
+    margin-bottom: rem(5px);
+  }
+
+  &-mbmidden {
+    margin-bottom: rem(10px);
+  }
+
+  &-mbbig {
+    margin-bottom: rem(20px);
+  }
+
+  &_box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &_label {
+    margin-bottom: rem(5px) !important;
+  }
+
+  &_inp {
+    width: 100%;
+    height: 100%;
+  }
+
+  &_textarea {
+    resize: vertical;
+  }
+
+  &_len {
+    margin-top: rem(5px) !important;
+    text-align: right;
+  }
+}

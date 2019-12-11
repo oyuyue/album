@@ -1,0 +1,47 @@
+.checkbox {
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+
+  & input {
+    display: none;
+  }
+
+  & input:checked + &_inner &_inner_icon {
+    background: currentColor;
+  }
+
+  & input:checked + &_inner &_inner_ico {
+    transform: scale(1);
+  }
+
+  &_inner {
+    @include flex;
+    color: rgba(0,0,0,.7);
+
+    &-blue {
+      color: var(--color-blue);
+    }
+
+
+    &_icon {
+      width: rem(18px);
+      height: rem(18px);
+      margin-right: rem(5px);
+      line-height: rem(13px);
+      text-align: center;
+      box-sizing: border-box;
+      border: 2px solid currentColor;
+      border-radius: rem(3px);    
+      transform: scale(.8);
+      transition: background-color .3s ease;
+    }
+
+    &_ico {
+      color: #fff;
+      transform: scale(0);
+      transition: transform .15s ease;
+    }
+
+  }
+}

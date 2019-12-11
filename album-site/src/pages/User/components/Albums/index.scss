@@ -1,0 +1,9 @@
+.pu_albums {
+  &_item {
+    width: rem(300px);
+
+    &_mi {
+      @include flex(space-between)
+    }
+  }
+}

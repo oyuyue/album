@@ -1,0 +1,9 @@
+.loading {
+  @include flex(center);
+  color: var(--color-text-secondary);
+
+  &_btn {
+    margin-top: rem(2px);
+    margin-left: rem(10px);
+  }
+}

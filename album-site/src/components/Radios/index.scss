@@ -1,0 +1,43 @@
+.radios {
+  padding: rem(5px) rem(10px);
+  background: rgba(0,0,0,.05);
+
+  &_inner {
+    @include flex;
+    flex-wrap: wrap;
+    user-select: none;
+  }
+
+  &_title {
+    margin-bottom: rem(10px);
+  }
+
+  & input {
+    display: none;
+  }
+
+  & input:checked + &_content &_icon {
+    background-color: #000;
+  }
+  
+  &_content {
+    @include flex;
+    margin-right: rem(8px);
+    margin-bottom: rem(5px);
+    cursor: pointer;
+  }
+
+  &_icon {
+    width: rem(18px);
+    height: rem(18px);
+    opacity: .8;
+    margin-right: rem(3px);
+    padding: rem(2px);
+    background-clip: content-box;
+    box-sizing: border-box;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: scale(.8);
+    transition: background-color .3s ease;
+  }
+}

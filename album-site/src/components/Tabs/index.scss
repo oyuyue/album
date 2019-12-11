@@ -1,0 +1,40 @@
+.tabs {
+  position: relative;
+
+  &_list {
+    display: flex;
+    align-items: center;
+  }
+
+  &_item {
+    display: flex;
+    align-items: center;
+    margin-right: rem(20px);
+    padding: 0 rem(3px) rem(15px) 0;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+
+    &_sub {
+      margin-left: rem(5px);
+    }
+
+    &:hover {
+      color: var(--color-primary-light);
+    }
+
+    &-active {
+      color: var(--color-primary);
+    }
+  }
+
+  &_indicator {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: all .2s ease;
+  }
+}

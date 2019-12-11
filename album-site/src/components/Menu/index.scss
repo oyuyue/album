@@ -1,0 +1,61 @@
+.menu {
+  @include background-blur;
+
+  padding: rem(10px);
+  border-radius: rem(6px);
+  background: var(--color-background-menu);
+  box-shadow: 0 4px 8px rgba(0,0,0,.2),0 0 4px rgba(0,0,0,.05);
+
+  &-pure {
+    backdrop-filter: none;
+    background: #fff;
+  }
+
+  &_item {
+    display: flex;
+    align-items: center;
+    min-width: rem(130px);
+    padding: rem(5px);
+    border-radius: rem(4px);
+    word-break: break-all;
+    cursor: pointer;
+    user-select: none;
+
+    &_icon {
+      &-s {
+        margin-left: rem(8px);
+      }
+
+      &-p {
+        opacity: .9;
+        margin-right: rem(8px);
+      }
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, .1);
+    }
+
+    &_content {
+      flex: 1;
+    }
+
+    &-divider &_content {
+      height: 1px;
+      margin: rem(3px) 0;
+      background: rgba(0,0,0,.15);
+    }
+
+    &-divider:hover {
+      background: transparent;
+    }
+
+    &-danger {
+      color: var(--color-danger);
+    }
+
+    &-blue {
+      color: var(--color-blue);
+    }
+  }
+}

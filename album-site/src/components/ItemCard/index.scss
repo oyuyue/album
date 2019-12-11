@@ -1,0 +1,53 @@
+.icard {
+  width: 300px;
+
+  &_pbox {
+    position: relative;
+    transition: box-shadow 0.5s;
+    will-change: transform;
+
+    &:hover {
+      box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.5);
+      z-index: 6;
+    }
+
+    a {
+      display: block;
+      font-size: 0;
+    }
+  }
+
+  &_album {
+    position: absolute;
+    top: rem(7px);
+    right: rem(7px);
+    color: var(--color-text-secondary-light);
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  &_picBox {
+    @include fixed-aspect-ratio-box;
+  }
+
+  &_tbox {
+    display: flex;
+    align-items: flex-start;
+    padding-top: rem(12px);
+  }
+
+  &_avatar {
+    width: rem(36px);
+    height: rem(36px);
+    margin-right: rem(12px);
+    border-radius: 50%;
+  }
+
+  &_meta {
+    @include flex;
+  }
+
+  &_dot {
+    content: '•';
+    margin: 0 rem(5px);
+  }
+}

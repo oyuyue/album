@@ -1,0 +1,20 @@
+@import 'assets/styles/abstracts/index';
+
+.searchItem {
+  @include flex;
+  margin: rem(10px) 0;
+
+  &-circle &_image {
+    border-radius: 50%;
+  }
+
+  &_image {
+    width: rem(100px);
+    height: rem(100px);
+    margin-right: rem(20px);
+  }
+
+  &_title {
+    margin-bottom: rem(8px);
+  }
+}

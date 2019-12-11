@@ -1,0 +1,62 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: rem($size-sidebar-width);
+  background: var(--color-sidebar-background);
+  z-index: 5;
+  transform: translate3d(-100%,0,0);
+  transition: transform .2s ease;
+  &-opened {
+    transform: translate3d(0,0,0);
+  }
+
+  &-suspend {
+    background: var(--color-main-background);
+    z-index: 12;
+  }
+
+  &_header {
+    @include flex;
+    height: rem($size-header-height);
+    padding: 0 rem(15px);
+  }
+
+  &_mask {
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    opacity: 0;
+    z-index: 11;
+    transition: opacity .2s ease;
+  }
+
+  &_mask-show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__nav {
+    padding: rem(12px) 0;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      padding: 0 rem(24px);
+      height: rem(42px);
+
+      &:hover {
+        background: #e4e4e7;
+      }
+    }
+
+    &__icon {
+      margin-right: rem(24px);
+    }
+  }
+}

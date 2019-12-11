@@ -1,0 +1,118 @@
+:root {
+  --color-primary: #6441a4;
+  --color-primary-dark: #52299e;
+  --color-primary-light: #9147ff;
+  --color-secondary: #25222d;
+  --color-secondary-dark: #1f1d24;
+  --color-danger: #f44336;
+  --color-blue: #0070c9;
+  --color-success: #43a047;
+  --color-info: #1976d2;
+  --color-warning: #ffa000;
+  --color-background: #fff;
+  --color-white: #fff;
+  --color-main-background: #fafafa;
+  --color-header-background: rgba(255,255,255,.8);
+  --color-sidebar-background: #efeff1;
+  --color-divider-color: #630101;
+  --color-background-button:rgba(0,0,0,0.06); 
+  --color-background-input: rgba(0,0,0,0.05);
+  --color-background-select-active: #fff;
+  --color-background-menu: rgba(255,255,255,.8);
+
+  --color-text-primary: #212121;
+  --color-text-secondary: #606060;
+  --color-text-secondary-light: #f6f6f6;
+  --color-text-black: #212121;
+}
+
+html {
+  font-size: ($size-vw-fontsize / $size-vw-design) * 100vw;
+  color: var(--color-text-primary);
+  background: var(--color-main-background);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Microsoft JhengHei', 'Microsoft YaHei', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: rem(14px);
+}
+
+img {
+  display: inline-block;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+input, textarea {
+  display: inline-block;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-sizing: border-box;
+}
+
+p, h3, button {
+  margin: 0;
+}
+
+a:focus,
+a:active,
+div:focus,
+input,
+button,
+textarea,
+textarea:focus {
+  outline: none;
+}
+
+input,
+textarea {
+  caret-color: var(--color-blue);
+}
+
+button {
+  display: inline-block;
+  padding: 0;
+  border: none;
+  background: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: rgba(0, 0, 0, .35);
+
+  &:hover {
+    background: rgba(0, 0, 0, .8);
+  }
+}

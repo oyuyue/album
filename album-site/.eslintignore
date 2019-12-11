@@ -1,0 +1,6 @@
+src/registerServiceWorker.js
+src/**/__tests__/**
+node_modules/
+public/
+mock/
+config-overrides.js

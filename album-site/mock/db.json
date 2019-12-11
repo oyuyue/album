@@ -1,0 +1,103 @@
+{
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" },
+  "banners": [
+    {
+      "imageUrl": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=423551398,1303118808&fm=26&gp=0.jpg",
+      "url": "/albums/1"
+    },
+    {
+      "imageUrl": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3087232940,2136816654&fm=26&gp=0.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "imageUrl": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1597286437,2443922363&fm=26&gp=0.jpg",
+      "url": "tel:+1-303-499-7111"
+    },
+    {
+      "imageUrl": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=423551398,1303118808&fm=26&gp=0.jpg",
+      "url": "/albums/1"
+    },
+    {
+      "imageUrl": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1088745089,3650009557&fm=26&gp=0.jpg",
+      "url": "mailto:chriscoyier@gmail.com"
+    }
+  ],
+  "photos": [
+    {
+      "id": "1",
+      "imageUrl": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3608155120,1630233151&fm=26&gp=0.jpg",
+      "title": "标题标题",
+      "views": 1000,
+      "createdTime": "1574771113409",
+      "user": {
+        "avatarUrl": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1287547337,1132733179&fm=26&gp=0.jpg",
+        "nickname": "昵称",
+        "username": "username"
+      }
+    }
+  ],
+  "albums": [
+    {
+      "id": "1",
+      "imageUrl": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3608155120,1630233151&fm=26&gp=0.jpg",
+      "title": "标题标题",
+      "views": 1000,
+      "createdTime": "1574771113409",
+      "user": {
+        "avatarUrl": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1287547337,1132733179&fm=26&gp=0.jpg",
+        "nickname": "昵称",
+        "username": "username"
+      }
+    }
+  ],
+  "tags": [
+    {
+      "id": "1",
+      "name": "中文"
+    },
+    {
+      "id": "2",
+      "name": "多人游戏"
+    },
+    {
+      "id": "3",
+      "name": "西班牙文"
+    },
+    {
+      "id": "4",
+      "name": "德文"
+    },
+    {
+      "id": "5",
+      "name": "日文"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "风景"
+    },
+    {
+      "id": "2",
+      "name": "汽车"
+    },
+    {
+      "id": "3",
+      "name": "动漫"
+    },
+    {
+      "id": "4",
+      "name": "人物"
+    },
+    {
+      "id": "5",
+      "name": "颜色"
+    }
+  ]
+}

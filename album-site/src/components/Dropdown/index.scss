@@ -1,0 +1,29 @@
+.dropdown {
+  display: inline-block;
+  position: relative;
+
+  &_menus {
+    display: none;
+    position: absolute;
+
+    &-active {
+      display: block;
+    }
+
+    &-left {
+      left: 0;
+    }
+
+    &-right {
+      right: 0;
+    }
+
+    &-top {
+      margin-top: 8px;
+    }
+
+    &-bottom {
+      bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.main {
+  margin-top: rem($size-header-height);  
+  padding: rem($size-gap-midden);
+  transition: margin-left .2s ease;
+
+  &-narrow {
+    margin-left: rem($size-sidebar-width);
+  }
+}

@@ -1,0 +1,34 @@
+.imageFilter {
+  @include flex($wrap: wrap, $ac: flex-start);
+  margin-left: rem(-5px);
+  user-select: none;
+
+  &_item {
+    position: relative;
+    margin-left: rem(5px);
+    margin-bottom: rem(5px);
+    cursor: pointer;
+
+    & canvas {
+      border-radius: rem(8px);
+    }
+
+    &_check {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      color: #fff;
+    }
+
+    &-active &_check {
+      opacity: 1;
+    }
+
+    &-active canvas {
+      filter: brightness(.5);
+    }
+  }
+}

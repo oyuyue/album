@@ -1,0 +1,13 @@
+.spin {
+  &-posed {
+    position: relative;
+  }
+
+  &_mask {
+    @include position(absolute);
+    @include flex(center);
+    color: rgba(255,255,255,.8);
+    background: rgba(0,0,0,.5);
+    z-index: 15;
+  }
+}

@@ -1,0 +1,29 @@
+.discover {
+  &_banner {
+    height: rem(300px);
+    margin-bottom: rem($size-gap-big);
+
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &_items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 0 rem(-5px);
+  }
+
+  &_citem {
+    width: 25%;
+    padding: 0 rem(5px);
+    margin-bottom: rem(20px);
+    box-sizing: border-box;
+  }
+
+  &_heading {
+    margin-bottom: rem(10px);
+  }
+}

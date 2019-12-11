@@ -1,0 +1,84 @@
+.p_upload {
+  @include flex(center);
+  @include position;
+  z-index: 10;
+
+  &_mask {
+    @include position;
+    background: rgba(0,0,0,.55);
+  }
+
+  &_close {
+    position: absolute;
+    right: rem(5px);
+    top: rem(5px);
+  }
+
+  &_drag {
+    width: rem(300px);
+    margin: 0 rem(30px);
+  }
+
+  &_main {
+    display: flex;
+    align-items: stretch;
+    max-width: 80vw;
+    max-height: 90vh;
+    min-height: rem(400px);
+    background: #fff;
+    z-index: 11;
+  }
+
+  &_preview {
+    @include flex;
+    flex: 1;
+    font-size: 0;
+    text-align: center;
+    overflow: auto;
+
+    & canvas {
+      max-width: 100%;
+    }
+  }
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+    width: rem(300px);
+    padding: rem(20px);
+  }
+
+  &_private {
+    @include flex(space-between);
+    margin: rem(5px) 0;
+    color: var(--color-blue);
+
+    &_text {
+      @include flex;
+    }
+
+    &_icon {
+      margin-right: rem(8px);
+    }
+  }
+
+  &_filters {
+    flex: 1;
+    margin-top: rem(10px);
+    overflow: auto;
+    overflow-x: hidden;
+  }
+
+  &_actions {
+    @include flex;
+    margin-top: rem(10px);
+
+    &_upload {
+      margin-right: auto;
+    }
+
+    &_cancel {
+      margin-right: rem(10px);
+    }
+  }
+}

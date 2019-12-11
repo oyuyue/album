@@ -1,0 +1,16 @@
+.divider {
+  @include flex(space-between);
+  height: rem(30px);
+  padding: rem(10px) 0;
+
+  &_box {
+    color: var(--color-text-secondary);
+    padding: 0 rem(6px);
+  }
+
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid var(--color-divider-color);
+  }
+}

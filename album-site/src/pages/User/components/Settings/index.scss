@@ -1,0 +1,27 @@
+.settings {
+  &_content {
+    width: rem(500px);
+  }
+
+  &_item {
+    padding: rem(10px);
+    border-bottom: 1px solid rgba(0,0,0,.05);
+  
+    &-expend {
+      background: rgba(0,0,0,.05);
+    }
+  
+    &-expend &_expand {
+      display: block;
+    }
+  
+    &_compress {
+      @include flex(space-between);
+    }
+  
+    &_expand {
+      display: none;
+      padding: rem(10px) 0;
+    }
+  }
+}

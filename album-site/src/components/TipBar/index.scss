@@ -1,0 +1,17 @@
+.tipBar {
+  @include flex(center);
+  padding: rem(10px) 0;
+
+  &-hide {
+    display: none;
+  }
+
+  &_text {
+    margin-right: rem(5px);
+  }
+
+  &_content {
+    @include flex(center);
+    flex: 1;
+  }
+}

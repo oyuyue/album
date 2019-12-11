@@ -1,0 +1,11 @@
+.result {
+  @include flex(center);
+  flex-direction: column;
+  margin: 0 auto;
+  padding: rem(20px);
+  text-align: center;
+
+  &_icon {
+    margin-bottom: rem(8px);
+  }
+}

@@ -1,0 +1,37 @@
+.p_album {
+  background: linear-gradient(0deg,#f7f7f8,rgba(247,247,248,.25)), linear-gradient(90deg,#f7f7f8,rgba(247,247,248,.25)), url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3715814394,161626451&fm=26&gp=0.jpg) no-repeat;
+  background-size: cover;
+  background-position: right center;
+
+  &_header {
+    @include flex;
+  }
+
+  &_info {
+    margin-left: rem(20px);
+
+    &_meta {
+      margin: rem(15px) 2px;
+    }
+
+    &_tag {
+      margin-right: rem(8px);
+    }
+  }
+
+  &_user {
+    @include flex;
+    margin-top: rem(30px);
+
+    &_avatar {
+      width: rem(30px);
+      height: rem(30px);
+      margin-right: rem(10px);
+      border-radius: 50%;
+    }
+  }
+
+  &_content {
+    margin-top: rem(10px);
+  }
+}

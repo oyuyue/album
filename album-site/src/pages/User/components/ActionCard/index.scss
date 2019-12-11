@@ -1,0 +1,32 @@
+.ac {
+  &_tbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+  }
+
+  &_image {
+    width: 100%;
+  }
+
+  &_title {
+    flex: 1;
+    padding-right: rem(5px);
+  }
+
+  &_meta {
+    margin-top: rem(3px);
+    margin-bottom: rem(8px);
+  }
+
+  &_tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &_tag {
+    margin-right: rem(10px);
+  }
+}

@@ -1,0 +1,17 @@
+.las {
+  width: rem(300px);
+  padding: rem(10px);
+
+  &_login {
+    &_extra {
+      @include flex(space-between);
+      margin: rem(10px) 0;
+    }
+  }
+
+  &_signup {
+    &_extra {
+      margin: rem(10px) 0;
+    }
+  }
+}

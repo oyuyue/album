@@ -1,0 +1,57 @@
+.carousel {
+  position: relative;
+  height: 100%;
+  user-select: none;
+
+  &__item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 0;
+
+    &__inner {
+      height: 100%;
+      transition: all .3s ease;
+      box-shadow: 0 6px 16px 0 rgba(0, 0, 0, .2);
+      background: var(--color-background);
+    }
+
+    &__mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, .6);
+      opacity: .5;
+      transition: opacity .3s ease;
+      z-index: 5;
+    }
+
+    &__mask:hover {
+      opacity: 0;
+    }
+
+    &__mask:hover + &__inner {
+      transform: scale(1.02);
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);    
+    z-index: 5;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
+  }
+}

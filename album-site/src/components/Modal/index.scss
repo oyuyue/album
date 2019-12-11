@@ -1,0 +1,56 @@
+.modal {
+  @include position;
+  text-align: center;
+  z-index: 10;
+
+  &_mask {
+    @include position;
+    background: rgba(0,0,0,.35);
+    opacity: 0;
+    transition: opacity .2s ease;
+
+    &-active {
+      opacity: 1;
+    }
+  }
+
+  &_inner {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+  }
+
+  &_content {
+    @include background-blur;
+    display: flex;
+    flex-direction: column;
+    min-width: rem(250px);
+    max-width: 85vw;
+    max-height: 90vh;
+    margin: 0 auto;
+    padding: rem(10px);
+    border-radius: rem(10px);
+    background: rgba(255,255,255,.8);
+    box-shadow: 0 3px 15px rgba(0,0,0,.2);
+  }
+
+  &_title {
+    @include flex(space-between);
+    padding-bottom: rem(10px);
+  }
+
+  &_main {
+    flex: 1;
+    overflow: auto;
+  }
+
+  &_actions {
+    @include flex(flex-end);
+    padding-top: rem(10px);
+
+    &_confirm {
+      margin-left: rem(10px);
+    }
+  }
+}
