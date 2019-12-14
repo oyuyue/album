@@ -2,8 +2,11 @@ package wopen.albumserver.domain.model.tag;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Nationalized;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 import wopen.albumserver.domain.shared.Audit;
 
 import javax.persistence.*;
@@ -12,6 +15,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@NaturalIdCache
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tag implements Serializable {
     @Id

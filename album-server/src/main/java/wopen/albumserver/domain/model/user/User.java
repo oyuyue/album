@@ -2,8 +2,7 @@ package wopen.albumserver.domain.model.user;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Nationalized;
-import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +14,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@NaturalIdCache
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User implements Serializable {
     @Id

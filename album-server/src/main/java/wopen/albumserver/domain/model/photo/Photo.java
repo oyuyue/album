@@ -2,8 +2,11 @@ package wopen.albumserver.domain.model.photo;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Nationalized;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 import wopen.albumserver.domain.model.phototag.PhotoTag;
 import wopen.albumserver.domain.shared.Audit;
 
@@ -14,6 +17,8 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@NaturalIdCache
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Photo implements Serializable{
     @Id
