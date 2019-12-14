@@ -13,6 +13,7 @@ import wopen.albumserver.domain.shared.Audit;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -40,4 +41,17 @@ public class Photo implements Serializable{
 
     @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PhotoTag> tags = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Photo photo = (Photo) o;
+        return photoId.equals(photo.photoId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(photoId);
+    }
 }

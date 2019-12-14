@@ -80,6 +80,7 @@ public class DataGenerator {
         if (cls == Boolean.class || cls == boolean.class) return (T) Boolean.valueOf(random.nextBoolean());
         if (cls == BigDecimal.class) return (T) BigDecimal.valueOf(random.nextDouble());
         if (cls == Instant.class) return (T) Instant.now().minus(random.nextInt(10), ChronoUnit.DAYS);
+        if (cls == UUID.class) return (T) UUID.randomUUID();
         if (cls == Optional.class) return null;
         if (cls == List.class || cls == Collection.class) return (T) new ArrayList<>();
         if (cls == Set.class) return (T) new HashSet<>();
