@@ -1,10 +1,10 @@
-package wopen.albumserver.domain.model.photo;
+package wopen.albumserver.domain.model.album;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Nationalized;
 import org.hibernate.annotations.NaturalId;
-import wopen.albumserver.domain.model.phototag.PhotoTag;
+import wopen.albumserver.domain.model.albumcategory.AlbumCategory;
 import wopen.albumserver.domain.shared.Audit;
 
 import javax.persistence.*;
@@ -15,24 +15,21 @@ import java.util.UUID;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Photo implements Serializable{
+public class Album implements Serializable {
     @Id
     @GeneratedValue
     private UUID id;
     @NaturalId
     @Embedded
-    @Column(nullable = false, unique = true, updatable = false)
-    private PhotoId photoId;
-    private Boolean personal = false;
+    @Column(nullable = false, updatable = false, unique = true)
+    private AlbumId albumId;
     @Nationalized
     private String title;
-    private String originImageUrl;
     private String imageUrl;
-    private String imageFilterType;
-    private Long views = 0L;
+    private Boolean personal = false;
     @Embedded
     private Audit audit = new Audit();
 
-    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PhotoTag> tags = new HashSet<>();
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AlbumCategory> categories = new HashSet<>();
 }
