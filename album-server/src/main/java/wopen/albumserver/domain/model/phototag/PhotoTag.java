@@ -2,6 +2,7 @@ package wopen.albumserver.domain.model.phototag;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import wopen.albumserver.domain.model.photo.Photo;
 import wopen.albumserver.domain.model.tag.Tag;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@ToString
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PhotoTag implements Serializable {

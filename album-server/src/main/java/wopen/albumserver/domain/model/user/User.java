@@ -2,6 +2,7 @@ package wopen.albumserver.domain.model.user;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.*;
 
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
+@ToString
 @Entity
 @NaturalIdCache
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

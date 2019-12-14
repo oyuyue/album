@@ -2,6 +2,7 @@ package wopen.albumserver.domain.model.albumcategory;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import wopen.albumserver.domain.model.Category.Category;
 import wopen.albumserver.domain.model.album.Album;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@ToString
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AlbumCategory implements Serializable {

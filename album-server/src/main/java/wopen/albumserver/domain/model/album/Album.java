@@ -2,6 +2,7 @@ package wopen.albumserver.domain.model.album;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Nationalized;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+@ToString
 @Entity
 @NaturalIdCache
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

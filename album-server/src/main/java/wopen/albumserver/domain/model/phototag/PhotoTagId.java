@@ -3,6 +3,7 @@ package wopen.albumserver.domain.model.phototag;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
+@ToString
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

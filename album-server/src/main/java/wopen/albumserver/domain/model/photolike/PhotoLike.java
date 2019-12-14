@@ -3,6 +3,7 @@ package wopen.albumserver.domain.model.photolike;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import wopen.albumserver.domain.model.photo.Photo;
 import wopen.albumserver.domain.model.user.User;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@ToString
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
