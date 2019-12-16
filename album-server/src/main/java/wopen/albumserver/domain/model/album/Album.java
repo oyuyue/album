@@ -9,6 +9,7 @@ import org.hibernate.annotations.Nationalized;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 import wopen.albumserver.domain.model.albumcategory.AlbumCategory;
+import wopen.albumserver.domain.model.user.User;
 import wopen.albumserver.domain.shared.Audit;
 
 import javax.persistence.*;
@@ -40,6 +41,9 @@ public class Album implements Serializable {
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AlbumCategory> categories = new HashSet<>();
+
+    @ManyToOne
+    private User user;
 
     @Override
     public boolean equals(Object o) {

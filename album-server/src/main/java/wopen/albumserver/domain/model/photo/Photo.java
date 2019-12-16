@@ -8,7 +8,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Nationalized;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
+import wopen.albumserver.domain.model.album.Album;
 import wopen.albumserver.domain.model.phototag.PhotoTag;
+import wopen.albumserver.domain.model.user.User;
 import wopen.albumserver.domain.shared.Audit;
 
 import javax.persistence.*;
@@ -43,6 +45,12 @@ public class Photo implements Serializable{
 
     @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PhotoTag> tags = new HashSet<>();
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Album album;
 
     @Override
     public boolean equals(Object o) {
