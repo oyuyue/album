@@ -12,18 +12,18 @@ import java.util.Objects;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AlbumId implements Serializable {
-    private String id;
+    private String albumId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AlbumId albumId = (AlbumId) o;
-        return id.equals(albumId.id);
+        return this.albumId.equals(albumId.albumId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(albumId);
     }
 }

@@ -16,7 +16,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PhotoId implements Serializable {
-    private String id;
+    private String photoId;
 
     public PhotoId(@NotNull String id) {
         this.id = id;
@@ -31,11 +31,11 @@ public class PhotoId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PhotoId photoId = (PhotoId) o;
-        return id.equals(photoId.id);
+        return this.photoId.equals(photoId.photoId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(photoId);
     }
 }
