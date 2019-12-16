@@ -1,9 +1,8 @@
-package wopen.albumserver.api.photo.facade;
+package wopen.albumserver.api.web.photo;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import wopen.albumserver.api.photo.web.CreatePhotoCommand;
 
 import java.util.List;
 
@@ -15,12 +14,12 @@ public class PhotoServiceFacadeImpl implements PhotoServiceFacade {
     }
 
     @Override
-    public String updatePhoto(CreatePhotoCommand command) {
+    public String updatePhoto(UpsertPhotoCommand command) {
         return null;
     }
 
     @Override
-    public String createPhoto(CreatePhotoCommand command) {
+    public String createPhoto(UpsertPhotoCommand command) {
         return null;
     }
 

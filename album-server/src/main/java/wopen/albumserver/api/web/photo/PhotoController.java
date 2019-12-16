@@ -1,11 +1,9 @@
-package wopen.albumserver.api.photo.web;
+package wopen.albumserver.api.web.photo;
 
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import wopen.albumserver.api.photo.facade.PhotoDTO;
-import wopen.albumserver.api.photo.facade.PhotoServiceFacade;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +32,7 @@ public class PhotoController {
     }
 
     @PostMapping
-    public String upsertPhoto(CreatePhotoCommand command) {
+    public String upsertPhoto(UpsertPhotoCommand command) {
         if (Strings.isNotBlank(command.getId())) {
             return photoServiceFacade.updatePhoto(command);
         }
