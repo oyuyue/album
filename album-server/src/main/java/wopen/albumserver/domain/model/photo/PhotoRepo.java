@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PhotoRepo {
-    Optional<Photo> find(PhotoId id);
+//    Optional<Photo> find(PhotoId id);
 
     Photo save(Photo photo);
 

@@ -48,18 +48,18 @@ public class DataGenerator {
 
         if (o instanceof Collection || o instanceof Map) return true;
 
-        return t == String.class || t == Integer.class || t == Long.class || t == Double.class || t == BigDecimal.class || t == Instant.class || t == Boolean.class;
+        return t == String.class || t == Integer.class || t == Long.class || t == Double.class || t == BigDecimal.class || t == Instant.class || t == Boolean.class || UUID.class.isAssignableFrom(t);
     }
 
     private Object newInstance(Field field, List<Object> parents) {
         Class<?> t = field.getType();
         String tn = field.getGenericType().getTypeName();
 
-        if (t == List.class || t == Set.class) {
+        if (List.class.isAssignableFrom(t) || Set.class.isAssignableFrom(t)) {
             tn = singleGeneric.matcher(tn).replaceAll("$1");
             try {
                 Object filled = fill(Class.forName(tn), parents);
-                Collection<Object> coll = t == List.class ? new ArrayList<>() : new HashSet<>();
+                Collection<Object> coll = List.class.isAssignableFrom(t) ? new ArrayList<>() : new HashSet<>();
                 coll.add(filled);
                 return coll;
             } catch (ClassNotFoundException e) {
@@ -73,18 +73,18 @@ public class DataGenerator {
     @SuppressWarnings("unchecked")
     private <T> T newInstance(Class<T> cls, List<Object> parents) {
         if (cls.isEnum() || cls.isInterface() || cls.isAnnotation()) return null;
-        if (cls == String.class) return (T) RandomStringUtils.randomAlphabetic(10);
+        if (Optional.class.isAssignableFrom(cls)) return null;
+        if (String.class.isAssignableFrom(cls)) return (T) RandomStringUtils.randomAlphabetic(10);
         if (cls == Integer.class || cls == int.class) return (T) Integer.valueOf(random.nextInt());
         if (cls == Long.class || cls == long.class) return (T) Long.valueOf(random.nextLong());
         if (cls == Double.class || cls == double.class) return (T) Double.valueOf(random.nextDouble());
         if (cls == Boolean.class || cls == boolean.class) return (T) Boolean.valueOf(random.nextBoolean());
-        if (cls == BigDecimal.class) return (T) BigDecimal.valueOf(random.nextDouble());
-        if (cls == Instant.class) return (T) Instant.now().minus(random.nextInt(10), ChronoUnit.DAYS);
-        if (cls == UUID.class) return (T) UUID.randomUUID();
-        if (cls == Optional.class) return null;
-        if (cls == List.class || cls == Collection.class) return (T) new ArrayList<>();
-        if (cls == Set.class) return (T) new HashSet<>();
-        if (cls == Map.class) return (T) new HashMap<>();
+        if (BigDecimal.class.isAssignableFrom(cls)) return (T) BigDecimal.valueOf(random.nextDouble());
+        if (Instant.class.isAssignableFrom(cls)) return (T) Instant.now().minus(random.nextInt(10), ChronoUnit.DAYS);
+        if (UUID.class.isAssignableFrom(cls)) return (T) UUID.randomUUID();
+        if (Map.class.isAssignableFrom(cls)) return (T) new HashMap<>();
+        if (Set.class.isAssignableFrom(cls)) return (T) new HashSet<>();
+        if (List.class.isAssignableFrom(cls)) return (T) new ArrayList<>();
 
         Constructor<?>[] cons = cls.getDeclaredConstructors();
 

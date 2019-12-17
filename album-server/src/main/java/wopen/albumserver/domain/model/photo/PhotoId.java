@@ -19,7 +19,7 @@ public class PhotoId implements Serializable {
     private String photoId;
 
     public PhotoId(@NotNull String id) {
-        this.id = id;
+        this.photoId = id;
     }
 
     public static PhotoId next() {
