@@ -30,7 +30,7 @@ public class WebExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ApiError.of(messageTranslator.translate(ex.getMessage())), ex.getStatus());
     }
 
-    @ExceptionHandler({HttpException.class})
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleAll() {
         return new ResponseEntity<>(ApiError.of(messageTranslator.translate(Messages.INTERNAL_SERVER_ERROR)), HttpStatus.INTERNAL_SERVER_ERROR);
     }

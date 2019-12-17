@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 public class ApiError implements Serializable {
-    private String message;
+    private String msg;
 
     public static ApiError of (String msg) {
         return new ApiError(msg);
