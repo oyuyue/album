@@ -1,5 +1,6 @@
 package wopen.albumserver.api.handing;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,9 @@ public class WebExceptionHandler extends ResponseEntityExceptionHandler {
         this.messageTranslator = messageTranslator;
     }
 
+    @NotNull
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(@NotNull MethodArgumentNotValidException ex, @NotNull HttpHeaders headers, @NotNull HttpStatus status, @NotNull WebRequest request) {
         return handleExceptionInternal(ex, ApiError.of(ex.getLocalizedMessage()), headers, HttpStatus.BAD_REQUEST, request);
     }
 
