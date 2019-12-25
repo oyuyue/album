@@ -1,4 +1,4 @@
-package wopen.albumcore.utils;
+package wopen.albumservice.utils;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

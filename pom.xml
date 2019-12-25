@@ -12,8 +12,6 @@
     <modules>
         <module>album-boot</module>
         <module>album-api</module>
-        <module>album-core</module>
-        <module>album-security</module>
         <module>album-service</module>
         <module>album-site</module>
     </modules>

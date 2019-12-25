@@ -1,4 +1,4 @@
-package wopen.albumsecurity;
+package wopen.albumservice.security;
 
 import lombok.Data;
 

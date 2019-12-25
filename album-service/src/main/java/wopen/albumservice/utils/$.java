@@ -1,4 +1,4 @@
-package wopen.albumcore.utils;
+package wopen.albumservice.utils;
 
 import java.util.UUID;
 
