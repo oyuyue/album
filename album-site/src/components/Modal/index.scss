@@ -1,6 +1,5 @@
 .modal {
   @include position;
-  text-align: center;
   z-index: 10;
 
   &_mask {

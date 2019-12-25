@@ -39,7 +39,7 @@ const Layout: FC = () => {
           <Route path="/album" component={Album} />
           <Route path="/search/:type?" component={Search} />
           <Route path="/upload/:type/:id?" renderPrev component={Upload} />
-          <Route path="/login" component={LoginAndSignUp} />
+          <Route path="/account/:type" renderPrev component={LoginAndSignUp} />
         </CachedSwitch>
       </div>
     </>

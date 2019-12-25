@@ -1,22 +1,26 @@
 import React, {
   FC,
   memo,
-  InputHTMLAttributes,
   useCallback,
-  useState
+  useState,
+  ReactNode,
+  InputHTMLAttributes
 } from 'react'
 import clsx from 'clsx'
 import './index.scss'
 import Typography from 'components/Typography'
 
-interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps
+  extends Omit<Omit<InputHTMLAttributes<HTMLElement>, 'size'>, 'prefix'> {
+  className?: string
   size?: 'small' | 'big'
   label?: string | number
   textarea?: boolean
   maxLen?: number
   gapBottom?: 'small' | 'midden' | 'big'
   round?: boolean
+  prefix?: ReactNode
+  suffix?: ReactNode
 }
 
 const Input: FC<InputProps> = ({
@@ -27,6 +31,8 @@ const Input: FC<InputProps> = ({
   round = false,
   maxLen,
   gapBottom,
+  prefix,
+  suffix,
   ...rest
 }) => {
   const [focus, setFocus] = useState(false)
@@ -51,12 +57,16 @@ const Input: FC<InputProps> = ({
             {label}
           </Typography>
         )}
-        <C
-          onFocus={onFocus}
-          onBlur={onBlur}
-          className={clsx('input_inp', C === 'textarea' && 'input_textarea')}
-          {...rest}
-        />
+        <div className="input_main">
+          {prefix}
+          <C
+            {...rest}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            className={clsx('input_inp', C === 'textarea' && 'input_textarea')}
+          />
+          {suffix}
+        </div>
         {maxLen && (
           <Typography className="input_len" variant="caption">
             0/{maxLen}

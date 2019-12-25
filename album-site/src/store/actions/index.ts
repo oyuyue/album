@@ -41,7 +41,10 @@ import {
   ADD_MORE_USER_STUFFS,
   UI_CHANGE_BP,
   UI_TOGGLE_SIDEBAR,
-  UI_TOGGLE_THEME
+  UI_TOGGLE_THEME,
+  SET_ACCESS_TOKEN,
+  FETCH_MY_DETAILS,
+  FETCH_ACCESS_TOKEN
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -92,3 +95,7 @@ export const addMoreUserStuffs = makeKAC<UserKey>(ADD_MORE_USER_STUFFS)
 export const changeBP = makePAC<BP>(UI_CHANGE_BP)
 export const toggleSidebar = makeAC(UI_TOGGLE_SIDEBAR)
 export const toggleTheme = makeAC(UI_TOGGLE_THEME)
+
+export const setAccessToken = makePAC(SET_ACCESS_TOKEN)
+export const fetchMyDetails = makeAC(FETCH_MY_DETAILS)
+export const fetchAccessToken = makeAC(FETCH_ACCESS_TOKEN)

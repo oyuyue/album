@@ -37,9 +37,14 @@
     margin-bottom: rem(5px) !important;
   }
 
+  &_main {
+    @include flex;
+  }
+
   &_inp {
-    width: 100%;
-    height: 100%;
+    display: block;
+    flex: 1;
+    margin-right: auto;
   }
 
   &_textarea {

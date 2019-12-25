@@ -11,6 +11,7 @@
 
   &:disabled {
     cursor: not-allowed;
+    background: var(--color-background-button) !important;
   }
 
   &:focus {
