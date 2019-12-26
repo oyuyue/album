@@ -42,6 +42,7 @@
     "import/no-unresolved": 0,
     "import/named": 0,
     "import/order": "error",
-    "eqeqeq": 0
+    "eqeqeq": 0,
+    "react/display-name": 0
   }
 }
