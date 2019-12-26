@@ -1,6 +1,5 @@
 package wopen.albumapi.account;
 
-import org.springframework.session.web.http.SessionRepositoryFilter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +19,11 @@ public class AccountController {
     @GetMapping("/token")
     public TokenDto checkLogin(HttpSession session) {
         return new TokenDto(session.getId());
+    }
+
+    @PostMapping("/captcha")
+    public void sendCaptcha(@RequestBody SendCaptchaCommand command) {
+        accountService.sendSignUpCaptcha(command.getEmail());
     }
 
     @PostMapping("/signup")

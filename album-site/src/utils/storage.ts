@@ -13,3 +13,15 @@ export function setItem(key: string, value: any): void {
   } catch (error) {}
   localStorage.setItem(key, value)
 }
+
+let tokenCache = ''
+export function setAccessToken(token: string): void {
+  tokenCache = token
+  localStorage.setItem('access_token', token)
+}
+
+export function getAccessToken(): string {
+  if (tokenCache) return tokenCache
+  tokenCache = localStorage.getItem('access_token')
+  return tokenCache
+}

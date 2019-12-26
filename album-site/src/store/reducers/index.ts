@@ -9,6 +9,7 @@ import category from './category'
 import search from './search'
 import user from './user'
 import ui from './ui'
+import account from './account'
 
 export type RootState = {
   router: RouterState
@@ -20,6 +21,7 @@ export type RootState = {
   search: ReturnType<typeof search>
   user: ReturnType<typeof user>
   ui: ReturnType<typeof ui>
+  account: ReturnType<typeof account>
 }
 
 export default function createRootReducers(history: History) {
@@ -32,6 +34,7 @@ export default function createRootReducers(history: History) {
     category,
     search,
     user,
-    ui
+    ui,
+    account
   })
 }

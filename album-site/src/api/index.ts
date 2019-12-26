@@ -1,4 +1,4 @@
-import { get } from 'utils'
+import { get, post } from 'utils'
 
 export const fetchBanners = () => get('/banners')
 export const fetchTags = () => get('/tags')
@@ -13,3 +13,7 @@ export const fetchUserPhotos = (uId: string, payload?: any) =>
   get(`/users/${uId}/photos`, payload)
 export const fetchUserAlbums = (uId: string, payload?: any) =>
   get(`/users/${uId}/albums`, payload)
+export const fetchToken = () => get('/token')
+export const fetchMyDetails = () => get('/users/me')
+export const sendEmailCaptcha = (email: string) => post('/captcha', { email })
+export const signUp = (payload: any) => post('/signup', payload)
