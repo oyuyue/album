@@ -6,6 +6,7 @@ import tag from './tag'
 import category from './category'
 import search from './search'
 import user from './user'
+import account from './account'
 
 export default function*() {
   yield spawn(photo)
@@ -15,4 +16,5 @@ export default function*() {
   yield spawn(category)
   yield spawn(search)
   yield spawn(user)
+  yield spawn(account)
 }

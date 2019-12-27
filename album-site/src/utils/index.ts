@@ -32,7 +32,7 @@ export function request(
   method = method.toUpperCase()
 
   return fetch(
-    apiPrefix + url + stringifyQuery(payload),
+    apiPrefix + url + (method === 'GET' ? stringifyQuery(payload) : ''),
     Object.assign(
       {
         credentials: 'same-origin'
@@ -40,7 +40,7 @@ export function request(
       fetchConfig,
       {
         method,
-        body: method === 'GET' ? undefined : payload,
+        body: method === 'GET' ? undefined : JSON.stringify(payload),
         headers: Object.assign(
           method === 'GET' ? {} : { 'Content-Type': 'application/json' },
           fetchConfig ? fetchConfig.headers : undefined,
