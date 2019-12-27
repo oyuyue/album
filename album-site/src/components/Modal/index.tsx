@@ -1,19 +1,10 @@
-import React, {
-  FC,
-  memo,
-  useState,
-  useCallback,
-  useRef,
-  HTMLAttributes
-} from 'react'
-// import { CSSTransition } from 'react-transition-group'
+import React, { FC, memo, useState, useCallback, HTMLAttributes } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import { render, unmountComponentAtNode } from 'react-dom'
-import { animated, useSpring } from 'react-spring'
 import clsx from 'clsx'
 import Typography from 'components/Typography'
 import Button from 'components/Button'
 import './index.scss'
-import useForceUpdate from 'hooks/useForceUpdate'
 
 export interface ModalProps extends HTMLAttributes<HTMLElement> {
   title?: string
@@ -21,7 +12,7 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
   noCancel?: boolean
   onConfirm?: () => void
   onCancel?: () => void
-  afterClose?: () => void
+  onExited?: () => void
   autoClose?: boolean
   show?: boolean
 }
@@ -36,64 +27,53 @@ let Modal: FC<ModalProps> & {
   noFooter,
   onConfirm,
   onCancel,
-  autoClose,
-  afterClose,
+  onExited,
+  autoClose = true,
   noCancel,
-  show
+  show = false
 }) => {
-  const [close, setClose] = useState(false)
-  const isShow = show == null ? !close : show
-  const closed = useRef(!isShow)
+  const [closed, setClosed] = useState(show)
 
-  if (isShow) closed.current = false
-
-  const forceUpdate = useForceUpdate()
+  const closeHandler = useCallback(
+    (fn: Function) => {
+      if (typeof fn === 'function') {
+        Promise.resolve(fn()).then((res: any) => {
+          autoClose && res !== false && setClosed(true)
+        })
+      } else {
+        autoClose && setClosed(true)
+      }
+    },
+    [autoClose]
+  )
 
   const cancelHandler = useCallback(
     (e: MouseEvent | any) => {
       e.stopPropagation()
-      if (typeof onCancel === 'function') {
-        Promise.resolve(onCancel()).then(() => autoClose && setClose(true))
-      } else {
-        autoClose && setClose(true)
-      }
+      closeHandler(onCancel)
     },
-    [autoClose, onCancel]
+    [closeHandler, onCancel]
   )
-  const confirmHandler = useCallback(() => {
-    if (typeof onConfirm === 'function') {
-      Promise.resolve(onConfirm()).then(() => autoClose && setClose(true))
-    } else {
-      autoClose && setClose(true)
-    }
-  }, [autoClose, onConfirm])
-
-  const spring = useSpring({
-    from: { transform: 'scale(0)', opacity: 0 },
-    to: {
-      transform: `scale(${isShow ? 1 : 0})`,
-      opacity: isShow ? 1 : 0
-    },
-    onRest: ({ opacity }) => {
-      if (opacity === 0) {
-        closed.current = true
-        forceUpdate()
-        afterClose && afterClose()
-      }
-    }
-  })
+  const confirmHandler = useCallback(() => closeHandler(onConfirm), [
+    closeHandler,
+    onConfirm
+  ])
 
   return (
-    <div
-      className="modal"
-      style={{ display: isShow || !closed.current ? 'block' : 'none' }}
-    >
+    <div className="modal">
       <div
-        className={clsx('modal_mask', isShow && 'modal_mask-active')}
+        className={clsx('modal_mask', !closed && 'modal_mask-active')}
         onClick={cancelHandler}
       ></div>
       <div className="modal_inner">
-        <animated.div style={spring}>
+        <CSSTransition
+          in={!closed}
+          unmountOnExit
+          appear
+          classNames="modal"
+          onExited={onExited}
+          timeout={300}
+        >
           <div className="modal_content">
             {title && (
               <div className="modal_title">
@@ -115,7 +95,7 @@ let Modal: FC<ModalProps> & {
               </div>
             )}
           </div>
-        </animated.div>
+        </CSSTransition>
       </div>
     </div>
   )
@@ -127,10 +107,9 @@ const newInstance = (props: ModalProps) => {
   const div = document.createElement('div')
   document.body.appendChild(div)
 
-  props.autoClose = true
-  const afterClose = props.afterClose
-  props.afterClose = () => {
-    afterClose && afterClose()
+  const onExited = props.onExited
+  props.onExited = () => {
+    onExited && onExited()
     unmountComponentAtNode(div)
     div.parentNode.removeChild(div)
   }
@@ -140,7 +119,7 @@ const newInstance = (props: ModalProps) => {
 
 Modal.confirm = newInstance
 Modal.alert = props => {
-  newInstance({ ...props, noCancel: true })
+  newInstance({ noCancel: true, ...props })
 }
 
 export default Modal

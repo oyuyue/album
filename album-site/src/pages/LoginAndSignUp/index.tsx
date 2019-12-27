@@ -8,7 +8,7 @@ import './index.scss'
 
 const LoginAndSignUp: FC<RouteComponentProps> = ({ history: { goBack } }) => {
   return (
-    <Modal title=" " onCancel={goBack} noFooter>
+    <Modal title=" " onExited={goBack} noFooter>
       <div className="las">
         <div className="las_box">
           <Switch>
