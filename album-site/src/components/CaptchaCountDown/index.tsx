@@ -16,6 +16,7 @@ interface CaptchaCountDownProps {
   onChange?: InputProps['onChange']
   value?: InputProps['value']
   inputProps?: InputProps
+  name?: string
 }
 
 const CaptchaCountDown: FC<CaptchaCountDownProps> = ({
@@ -23,7 +24,8 @@ const CaptchaCountDown: FC<CaptchaCountDownProps> = ({
   onChange,
   onGetCaptcha,
   inputProps,
-  seconds = 60
+  seconds = 60,
+  name
 }) => {
   const [countDown, setCountDown] = useState(0)
   const timer = useRef<NodeJS.Timeout>()
@@ -73,6 +75,7 @@ const CaptchaCountDown: FC<CaptchaCountDownProps> = ({
       required
       minLength={4}
       maxLength={6}
+      name={name}
       {...inputProps}
       label="验证码"
       placeholder="请输入验证码"

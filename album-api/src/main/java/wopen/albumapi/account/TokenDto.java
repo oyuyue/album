@@ -8,5 +8,5 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 public class TokenDto implements Serializable {
-    private String token;
+    private String accessToken;
 }

@@ -40,7 +40,12 @@ export function request(
       fetchConfig,
       {
         method,
-        body: method === 'GET' ? undefined : JSON.stringify(payload),
+        body:
+          method === 'GET'
+            ? undefined
+            : payload instanceof FormData
+            ? payload
+            : JSON.stringify(payload),
         headers: Object.assign(
           method === 'GET' ? {} : { 'Content-Type': 'application/json' },
           fetchConfig ? fetchConfig.headers : undefined,

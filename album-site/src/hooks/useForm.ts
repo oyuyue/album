@@ -1,25 +1,33 @@
 import { useRef, useMemo } from 'react'
 import { isFunction } from 'lodash-es'
 
+interface Op {
+  report: (name?: string) => boolean
+  check: (name?: string) => boolean
+  value(name: string): any
+  value(): FormData
+}
+
 export default function useForm(): [
   { ref: any },
   {
-    report: (name: string) => boolean
-    check: (name: string) => boolean
-    value: (name?: string) => any
+    report: (name?: string) => boolean
+    check: (name?: string) => boolean
+    value(name: string): any
+    value(): FormData
   }
 ] {
   const form = useRef<HTMLFormElement>()
 
-  const op = useMemo(
+  const op = useMemo<Op>(
     () => ({
-      report(name?: string): boolean {
+      report(name) {
         let node = form.current
         if (!node || !node.elements) return true
         if (name) node = (form.current.elements as any)[name]
         return isFunction(node.reportValidity) ? node.reportValidity() : true
       },
-      check(name?: string): boolean {
+      check(name) {
         let node = form.current
         if (!node || !node.elements) return true
         if (name) node = (form.current.elements as any)[name]
@@ -33,13 +41,7 @@ export default function useForm(): [
             ? (node.elements as any)[name].value
             : null
         }
-        const res: { [k: string]: any } = {}
-        Array.from(form.current.elements).forEach((el: any) => {
-          if (el.name) {
-            res[el.name] = el.value
-          }
-        })
-        return res
+        return new FormData(node)
       }
     }),
     []

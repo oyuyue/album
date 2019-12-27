@@ -6,5 +6,5 @@ import java.io.Serializable;
 
 @Data
 public class LoginResultDTO implements Serializable {
-    private String token;
+    private String accessToken;
 }

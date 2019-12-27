@@ -45,7 +45,8 @@ import {
   FETCH_MY_DETAILS,
   FETCH_TOKEN,
   SET_MY_DETAILS,
-  SEND_CAPTCHA
+  SEND_CAPTCHA,
+  SIGN_UP
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -101,3 +102,4 @@ export const fetchMyDetails = makeAC(FETCH_MY_DETAILS)
 export const fetchToken = makeAC(FETCH_TOKEN)
 export const setMyDetails = makePAC(SET_MY_DETAILS)
 export const sendCaptcha = makePAC(SEND_CAPTCHA)
+export const signUp = makePAC(SIGN_UP)
