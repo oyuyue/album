@@ -8,7 +8,7 @@ const PasswordReset: FC = () => {
   return (
     <form className="las_signup">
       <Input required type="email" label="邮箱" placeholder="请输入邮箱地址" />
-      <CaptchaCountDown />
+      {/* <CaptchaCountDown /> */}
       <Input required type="password" label="密码" placeholder="最短 6 位" />
       <Input
         required

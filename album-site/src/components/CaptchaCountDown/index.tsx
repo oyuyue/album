@@ -1,3 +1,4 @@
+import { isFunction } from 'util'
 import React, {
   FC,
   memo,
@@ -10,7 +11,7 @@ import Input, { InputProps } from 'components/Input'
 import Button from 'components/Button'
 
 interface CaptchaCountDownProps {
-  onGetCaptcha?: () => void
+  onGetCaptcha: () => boolean | Promise<any>
   seconds?: number
   onChange?: InputProps['onChange']
   value?: InputProps['value']
@@ -27,21 +28,43 @@ const CaptchaCountDown: FC<CaptchaCountDownProps> = ({
   const [countDown, setCountDown] = useState(0)
   const timer = useRef<NodeJS.Timeout>()
 
-  const countDownHandler = useCallback(() => {
-    if (timer.current) return
+  const clearTimer = useCallback(() => {
+    clearInterval(timer.current)
+    timer.current = null
+  }, [])
+
+  const onCountDown = useCallback(() => {
     setCountDown(seconds)
     timer.current = setInterval(() => {
       setCountDown(v => {
         if (v <= 1) {
-          clearInterval(timer.current)
-          timer.current = null
+          clearTimer()
         }
         return v - 1
       })
     }, 1000)
+  }, [clearTimer, seconds])
 
-    onGetCaptcha && onGetCaptcha()
-  }, [onGetCaptcha, seconds])
+  const countDownHandler = useCallback(() => {
+    if (timer.current) return
+    if (onGetCaptcha) {
+      const res = onGetCaptcha()
+      if (!res) return
+      if (res !== true && isFunction(res.then)) {
+        timer.current = true as any
+        res
+          .then(() => {
+            clearTimer()
+            onCountDown()
+          })
+          .catch(() => {
+            clearTimer()
+          })
+      } else {
+        onCountDown()
+      }
+    }
+  }, [clearTimer, onCountDown, onGetCaptcha])
 
   useEffect(() => () => clearInterval(timer.current), [])
 

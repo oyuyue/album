@@ -8,6 +8,7 @@
   box-sizing: border-box;
   border-radius: rem($size-border-radius);
   background: transparent;
+  white-space: nowrap;
 
   &:disabled {
     cursor: not-allowed;

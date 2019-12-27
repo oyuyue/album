@@ -1,40 +1,29 @@
-import React, {
-  FC,
-  memo,
-  useEffect,
-  useCallback,
-  useRef,
-  useState
-} from 'react'
+import React, { FC, memo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import Input from 'components/Input'
 import Button from 'components/Button'
 import CaptchaCountDown from 'components/CaptchaCountDown'
 import { useDispatch } from 'react-redux'
 import { sendCaptcha } from 'store/actions'
+import useForm from 'hooks/useForm'
 
 const SignUp: FC = () => {
-  const [email, setEmail] = useState()
-  const form = useRef<HTMLFormElement>()
-  const emailHandler = useCallback(ev => {
-    setEmail(ev.currentTarget.value)
-  }, [])
+  const [bind, form] = useForm()
   const dispatch = useDispatch()
   const captchaHandler = useCallback(() => {
-    const emailEl = form.current.elements[0] as HTMLInputElement
-    if (emailEl.checkValidity()) {
-      // dispatch(sendCaptcha())
-    } else {
-      emailEl.reportValidity()
+    const res = form.report('email')
+    if (res) {
+      dispatch(sendCaptcha(form.value('email')))
     }
-  }, [])
+    return res
+  }, [dispatch, form])
 
   return (
-    <form ref={form} className="las_signup">
+    <form {...bind} className="las_signup">
       <Input
         required
         type="email"
-        onChange={emailHandler}
+        name="email"
         label="邮箱"
         placeholder="请输入邮箱地址"
       />
