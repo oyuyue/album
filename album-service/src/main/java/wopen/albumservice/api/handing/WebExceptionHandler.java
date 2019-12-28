@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import wopen.albumservice.app.exception.HttpException;
+import wopen.albumservice.exception.HttpException;
 import wopen.albumservice.infra.i18n.MessageTranslator;
 import wopen.albumservice.infra.i18n.Messages;
 

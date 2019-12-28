@@ -23,15 +23,17 @@ const notify: any = {}
 const types: IconType[] = ['error', 'info', 'success', 'warning']
 
 types.forEach(type => {
-  notify[type] = (args: NotifyArgs) => {
+  notify[type] = (title: string, args?: NotifyArgs) => {
+    args = args || {}
     if (args.duration == null) args.duration = DEFAULT_DURATION
+    if (args.title == null) args.title = title
     open({ ...args, type })
   }
 })
 
 notify.warn = notify.warning
 
-type NotifyFn = (args: NotifyArgs) => void
+type NotifyFn = (title: string, args?: NotifyArgs) => void
 
 export default notify as {
   error: NotifyFn

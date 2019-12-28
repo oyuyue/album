@@ -2,10 +2,8 @@ package wopen.albumservice.security;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class LoginCommand implements Serializable {
+public class LoginCommand {
     private String username;
     private String password;
 

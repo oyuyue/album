@@ -16,6 +16,7 @@ export function setItem(key: string, value: any): void {
 
 let tokenCache = ''
 export function setAccessToken(token: string): void {
+  if (!token) return
   tokenCache = token
   localStorage.setItem('access_token', token)
 }

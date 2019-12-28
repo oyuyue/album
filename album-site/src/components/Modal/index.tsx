@@ -10,6 +10,7 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
   title?: string
   noFooter?: boolean
   noCancel?: boolean
+  maskClose?: boolean
   onConfirm?: () => void
   onCancel?: () => void
   onExited?: () => void
@@ -28,6 +29,7 @@ let Modal: FC<ModalProps> & {
   onConfirm,
   onCancel,
   onExited,
+  maskClose = true,
   autoClose = true,
   noCancel,
   show = false
@@ -58,12 +60,18 @@ let Modal: FC<ModalProps> & {
     closeHandler,
     onConfirm
   ])
+  const onMaskClick = useCallback(
+    (e: MouseEvent | any) => {
+      if (maskClose) cancelHandler(e)
+    },
+    [cancelHandler, maskClose]
+  )
 
   return (
     <div className="modal">
       <div
         className={clsx('modal_mask', !closed && 'modal_mask-active')}
-        onClick={cancelHandler}
+        onClick={onMaskClick}
       ></div>
       <div className="modal_inner">
         <CSSTransition

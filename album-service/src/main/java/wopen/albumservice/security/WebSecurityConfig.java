@@ -26,8 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final ObjectMapper objectMapper;
 
     public WebSecurityConfig(
-    RestAuthenticationFailureHandler restAuthenticationFailureHandler,
-    RestAuthenticationSuccessHandler restAuthenticationSuccessHandler, UserDetailsService dbUserDetailsService, ObjectMapper objectMapper) {
+            RestAuthenticationFailureHandler restAuthenticationFailureHandler,
+            RestAuthenticationSuccessHandler restAuthenticationSuccessHandler, UserDetailsService dbUserDetailsService, ObjectMapper objectMapper) {
         this.restAuthenticationFailureHandler = restAuthenticationFailureHandler;
         this.restAuthenticationSuccessHandler = restAuthenticationSuccessHandler;
         this.dbUserDetailsService = dbUserDetailsService;
@@ -37,21 +37,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests()
-        .anyRequest()
-        .permitAll();
+                .authorizeRequests()
+                .anyRequest()
+                .permitAll();
 
         http
-        .formLogin().disable()
-        .httpBasic().disable()
-        .rememberMe().disable()
-        .cors().disable()
-        .csrf().disable();
+                .formLogin().disable()
+                .httpBasic().disable()
+                .rememberMe().disable()
+                .cors().disable()
+                .csrf().disable()
+                .headers().frameOptions().disable();
 
         http
-        .exceptionHandling()
-        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-        .accessDeniedHandler((req, res, ex) -> res.setStatus(HttpStatus.FORBIDDEN.value()));
+                .exceptionHandling()
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                .accessDeniedHandler((req, res, ex) -> res.setStatus(HttpStatus.FORBIDDEN.value()));
 
         http.logout().logoutSuccessHandler((req, res, auth) -> res.setStatus(HttpStatus.OK.value()));
         http.addFilterBefore(accountAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);

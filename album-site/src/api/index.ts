@@ -1,4 +1,4 @@
-import { get, post } from 'utils'
+import { get, post } from 'utils/request'
 
 export const fetchBanners = () => get('/banners')
 export const fetchTags = () => get('/tags')

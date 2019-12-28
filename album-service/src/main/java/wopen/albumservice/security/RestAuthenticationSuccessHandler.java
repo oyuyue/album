@@ -23,12 +23,11 @@ public class RestAuthenticationSuccessHandler implements AuthenticationSuccessHa
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         LoginResultDTO result = new LoginResultDTO();
-        result.setToken(request.getSession().getId());
+        result.setAccessToken(request.getSession().getId());
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setStatus(HttpStatus.OK.value());
         response.getWriter().print(objectMapper.writeValueAsString(result));
-        response.flushBuffer();
     }
 }

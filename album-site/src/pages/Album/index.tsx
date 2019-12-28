@@ -3,7 +3,7 @@ import Typography from 'components/Typography'
 import Chip from 'components/Chip'
 import ItemCard from 'components/ItemCard'
 import Divider from 'components/Divider'
-import notify from 'components/Notification'
+import Notification from 'components/Notification'
 import Modal from 'components/Modal'
 import NotFound from '../Exceptions/404'
 import './index.scss'
@@ -23,7 +23,7 @@ const Album: FC = () => {
           </Typography>
           <div className="p_album_info_tags">
             <Chip
-              onClick={() => notify.success({ title: 'title' })}
+              onClick={() => Notification.success('title')}
               className="p_album_info_tag"
             >
               风景

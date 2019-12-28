@@ -1,4 +1,4 @@
-package wopen.albumservice.security;
+package wopen.albumservice.session;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

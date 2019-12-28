@@ -3,7 +3,9 @@ package wopen.albumservice.domain.model.user;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.annotations.*;
+import wopen.albumservice.utils.$;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,23 +34,28 @@ public class User implements Serializable {
     private String password;
     private Gender gender = Gender.UNKNOWN;
     @Nationalized
-    @Column(nullable = false)
+    @Column
     private String nickname;
-    @Column(nullable = false)
+    @Column
     private String avatarUrl;
     @Nationalized
     private String bio;
     private String bannerUrl;
     @Column(nullable = false)
-    private Instant registeredAt;
+    private Instant signUpAt;
 
     private Boolean enabled = true;
     private Boolean locked = false;
 
-    public User(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
+    public static User signUp(String email, String password) {
+        User user = new User();
+        user.email = email;
+        user.password = password;
+        user.username = $.uuidString();
+        user.nickname = "新用户" + RandomStringUtils.randomNumeric(6);
+        user.signUpAt = Instant.now();
+
+        return user;
     }
 
     public String getPassword() {

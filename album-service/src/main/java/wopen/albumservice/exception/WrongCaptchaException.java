@@ -1,4 +1,4 @@
-package wopen.albumservice.app.exception;
+package wopen.albumservice.exception;
 
 import wopen.albumservice.infra.i18n.Messages;
 

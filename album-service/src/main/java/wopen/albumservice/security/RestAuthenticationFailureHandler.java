@@ -55,7 +55,6 @@ public class RestAuthenticationFailureHandler implements AuthenticationFailureHa
         error.setMsg(messageTranslator.translate(error.getMsg()));
         response.setStatus(status);
         response.getWriter().print(objectMapper.writeValueAsString(error));
-        response.flushBuffer();
     }
 
 }

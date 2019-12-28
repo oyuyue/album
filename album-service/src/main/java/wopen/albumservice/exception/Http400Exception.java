@@ -1,4 +1,4 @@
-package wopen.albumservice.app.exception;
+package wopen.albumservice.exception;
 
 import org.springframework.http.HttpStatus;
 

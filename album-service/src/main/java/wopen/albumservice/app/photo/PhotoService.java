@@ -1,4 +1,4 @@
-package wopen.albumservice.app;
+package wopen.albumservice.app.photo;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

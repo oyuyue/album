@@ -1,7 +1,5 @@
 import { AnyAction } from 'redux'
-import { isString, isFunction, omitBy, isNil, isObject } from 'lodash-es'
-import { apiPrefix } from 'config'
-import { getAccessToken } from './storage'
+import { isString, omitBy, isNil, isObject } from 'lodash-es'
 
 const images = [
   "\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Cg %3E%3Ccircle fill='%23000000' cx='400' cy='400' r='600'/%3E%3Ccircle fill='%23180d1c' cx='400' cy='400' r='500'/%3E%3Ccircle fill='%23261431' cx='400' cy='400' r='400'/%3E%3Ccircle fill='%23351947' cx='400' cy='400' r='300'/%3E%3Ccircle fill='%23451e5e' cx='400' cy='400' r='200'/%3E%3Ccircle fill='%23552277' cx='400' cy='400' r='100'/%3E%3C/g%3E%3C/svg%3E\"",
@@ -20,65 +18,6 @@ export function stringifyQuery(query: Record<string, any>): string {
   return isObject(query)
     ? '?' + new URLSearchParams(omitBy(query, isNil)).toString()
     : ''
-}
-
-export function request(
-  url: string,
-  method = 'GET',
-  payload?: any,
-  returnType: keyof Response = 'json',
-  fetchConfig?: RequestInit
-): Promise<Response | any> {
-  method = method.toUpperCase()
-
-  return fetch(
-    apiPrefix + url + (method === 'GET' ? stringifyQuery(payload) : ''),
-    Object.assign(
-      {
-        credentials: 'same-origin'
-      },
-      fetchConfig,
-      {
-        method,
-        body:
-          method === 'GET'
-            ? undefined
-            : payload instanceof FormData
-            ? payload
-            : JSON.stringify(payload),
-        headers: Object.assign(
-          method === 'GET' ? {} : { 'Content-Type': 'application/json' },
-          fetchConfig ? fetchConfig.headers : undefined,
-          { 'X-Auth-Token': getAccessToken() }
-        )
-      }
-    )
-  ).then(res =>
-    returnType
-      ? isFunction(res[returnType])
-        ? (res[returnType] as Function)()
-        : res[returnType]
-      : res
-  )
-}
-
-export function get(url: string, payload?: any): ReturnType<typeof request> {
-  return request(url, 'GET', payload)
-}
-
-export function post(url: string, payload?: any): ReturnType<typeof request> {
-  return request(url, 'POST', payload)
-}
-
-export function makeActionCreator<T extends AnyAction>(
-  type: string,
-  ...keys: string[]
-) {
-  return function(...args: any[]): T {
-    const action: AnyAction = { type }
-    keys.forEach((k, i) => (action[k] = args[i]))
-    return action as T
-  }
 }
 
 export function readableTimeFormatter(time: number | string): string {

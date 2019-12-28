@@ -1,4 +1,4 @@
-package wopen.albumservice.app;
+package wopen.albumservice.app.user;
 
 import wopen.albumservice.domain.model.user.User;
 

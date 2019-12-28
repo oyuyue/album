@@ -5,11 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import wopen.albumservice.app.exception.WrongCaptchaException;
+import wopen.albumservice.exception.WrongCaptchaException;
 import wopen.albumservice.domain.model.user.User;
 import wopen.albumservice.domain.model.user.UserRepo;
 import wopen.albumservice.messaging.EmailSender;
-import wopen.albumservice.utils.$;
 
 import java.time.Duration;
 
@@ -48,10 +47,7 @@ public class AccountServiceImpl implements AccountService {
         if (!StringUtils.equals(captcha, correctCaptcha)) {
             throw new WrongCaptchaException();
         }
-
-        User user = new User($.uuidString(), passwordEncoder.encode(password), email);
-        userRepo.save(user);
-
+        userRepo.save(User.signUp(email, passwordEncoder.encode(password)));
         redisTemplate.delete(key);
     }
 }

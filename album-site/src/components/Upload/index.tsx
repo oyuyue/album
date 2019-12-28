@@ -46,13 +46,11 @@ const Upload: FC<UploadProps> = ({
     (file: File) => {
       if (!file) return
       if (!mimeCheck(accept, file.type)) {
-        return Notification.error({ title: '非法文件格式' })
+        return Notification.error('非法文件格式')
       }
 
       if (maxSize > 0 && maxSize < file.size / 1024) {
-        return Notification.error({
-          title: `文件过大（最大 ${maxSize / 1024} ）`
-        })
+        return Notification.error(`文件过大（最大 ${maxSize / 1024} ）`)
       }
 
       onChange && onChange(file)

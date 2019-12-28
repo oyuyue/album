@@ -5,7 +5,7 @@ interface Op {
   report: (name?: string) => boolean
   check: (name?: string) => boolean
   value(name: string): any
-  value(): FormData
+  value(): Record<string, any>
 }
 
 export default function useForm(): [
@@ -14,7 +14,7 @@ export default function useForm(): [
     report: (name?: string) => boolean
     check: (name?: string) => boolean
     value(name: string): any
-    value(): FormData
+    value(): Record<string, any>
   }
 ] {
   const form = useRef<HTMLFormElement>()
@@ -41,7 +41,7 @@ export default function useForm(): [
             ? (node.elements as any)[name].value
             : null
         }
-        return new FormData(node)
+        return Object.fromEntries(new FormData(node).entries())
       }
     }),
     []

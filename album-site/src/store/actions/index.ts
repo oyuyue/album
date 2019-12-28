@@ -2,6 +2,7 @@ import { SearchKey } from 'store/reducers/search'
 import { makeAC, makePAC, makeKAC } from 'store/helpers'
 import { UserKey } from 'store/reducers/user'
 import { BP } from 'setup/setupMediaQuery'
+import { StateType } from 'store/reducers/state'
 import {
   FETCH_BANNERS,
   SET_BANNERS,
@@ -46,7 +47,9 @@ import {
   FETCH_TOKEN,
   SET_MY_DETAILS,
   SEND_CAPTCHA,
-  SIGN_UP
+  SIGN_UP,
+  CHANGE_STATE,
+  LOGIN
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -103,3 +106,12 @@ export const fetchToken = makeAC(FETCH_TOKEN)
 export const setMyDetails = makePAC(SET_MY_DETAILS)
 export const sendCaptcha = makePAC(SEND_CAPTCHA)
 export const signUp = makePAC(SIGN_UP)
+export const login = makePAC(LOGIN)
+
+const makeStateAction = (state: StateType) => (key: string) => ({
+  type: CHANGE_STATE,
+  payload: { [key]: state }
+})
+export const loading = makeStateAction(StateType.LOADING)
+export const error = makeStateAction(StateType.ERROR)
+export const done = makeStateAction(StateType.DONE)
