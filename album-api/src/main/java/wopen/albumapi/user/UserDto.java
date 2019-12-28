@@ -1,10 +1,18 @@
 package wopen.albumapi.user;
 
 import lombok.Data;
+import wopen.albumservice.domain.model.user.Gender;
 
-import java.io.Serializable;
+import java.time.Instant;
 
 @Data
-public class UserDto implements Serializable {
-
+public class UserDto {
+    private String username;
+    private String email;
+    private Gender gender;
+    private String nickname;
+    private String avatarUrl;
+    private String bio;
+    private String bannerUrl;
+    private Instant signUpAt;
 }
