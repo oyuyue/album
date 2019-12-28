@@ -83,4 +83,8 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(username, email);
     }
+
+    public void changePassword(String password) {
+        this.password = password;
+    }
 }

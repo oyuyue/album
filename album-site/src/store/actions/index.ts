@@ -49,7 +49,8 @@ import {
   SEND_CAPTCHA,
   SIGN_UP,
   CHANGE_STATE,
-  LOGIN
+  LOGIN,
+  CHANGE_PASSWORD
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -106,6 +107,7 @@ export const fetchToken = makeAC(FETCH_TOKEN)
 export const setMyDetails = makePAC(SET_MY_DETAILS)
 export const sendCaptcha = makePAC(SEND_CAPTCHA)
 export const signUp = makePAC(SIGN_UP)
+export const changePassword = makePAC(CHANGE_PASSWORD)
 export const login = makePAC(LOGIN)
 
 const makeStateAction = (state: StateType) => (key: string) => ({

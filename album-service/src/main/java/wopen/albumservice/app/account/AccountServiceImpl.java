@@ -3,12 +3,16 @@ package wopen.albumservice.app.account;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import wopen.albumservice.exception.ChangePasswordFailedException;
 import wopen.albumservice.exception.WrongCaptchaException;
 import wopen.albumservice.domain.model.user.User;
 import wopen.albumservice.domain.model.user.UserRepo;
+import wopen.albumservice.infra.i18n.Messages;
 import wopen.albumservice.messaging.EmailSender;
+import wopen.albumservice.utils.WebContextHolder;
 
 import java.time.Duration;
 
@@ -49,5 +53,15 @@ public class AccountServiceImpl implements AccountService {
         }
         userRepo.save(User.signUp(email, passwordEncoder.encode(password)));
         redisTemplate.delete(key);
+    }
+
+    @Override
+    public void changePassword(String password) {
+         String email = WebContextHolder.getCurrentUser().orElseThrow(ChangePasswordFailedException::new).getUsername();
+
+        User user = userRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(Messages.USER_NOT_FOUND));
+
+        user.changePassword(passwordEncoder.encode(password));
+        userRepo.save(user);
     }
 }

@@ -35,4 +35,9 @@ public class AccountController {
 
         return new TokenDto(session.getId());
     }
+
+    @PostMapping
+    public void changePassword(@RequestBody ChangePasswordCommand command) {
+        accountService.changePassword(command.getPassword());
+    }
 }

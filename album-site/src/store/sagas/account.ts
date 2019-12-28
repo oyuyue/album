@@ -5,14 +5,16 @@ import {
   sendEmailCaptcha,
   signUp as signUpApi,
   login as loginApi,
-  fetchMyDetails as fetchMyDetailsApi
+  fetchMyDetails as fetchMyDetailsApi,
+  changePassword as changePasswordApi
 } from 'api'
 import {
   FETCH_TOKEN,
   FETCH_MY_DETAILS,
   SEND_CAPTCHA,
   SIGN_UP,
-  LOGIN
+  LOGIN,
+  CHANGE_PASSWORD
 } from 'store/constants'
 import { setAccessToken } from 'utils/storage'
 import { setMyDetails } from 'store/actions'
@@ -43,6 +45,16 @@ function* signUp({ payload }: PayloadAction) {
   }
 }
 
+function* changePassword({ payload }: PayloadAction) {
+  try {
+    const res = yield call(changePasswordApi, payload)
+    setAccessToken(res.accessToken)
+    yield put(goBack())
+  } catch (error) {
+    console.log('change password error', error)
+  }
+}
+
 function* login({ payload }: PayloadAction) {
   try {
     const res = yield call(loginApi, payload)
@@ -59,5 +71,6 @@ export default function*() {
   yield takeLeading(FETCH_MY_DETAILS, fetchMyDetails)
   yield takeLeading(SEND_CAPTCHA, sendCaptcha)
   yield takeLeading(SIGN_UP, stateful(signUp))
+  yield takeLeading(CHANGE_PASSWORD, stateful(changePassword))
   yield takeLeading(LOGIN, stateful(login))
 }
