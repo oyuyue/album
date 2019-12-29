@@ -1,9 +1,11 @@
 package wopen.albumservice.app.user;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wopen.albumservice.domain.model.user.UpdateUserCommand;
 import wopen.albumservice.domain.model.user.User;
 import wopen.albumservice.domain.model.user.UserRepo;
+import wopen.albumservice.domain.model.user.UserStats;
 import wopen.albumservice.exception.AuthException;
 import wopen.albumservice.exception.UserNotFoundException;
 import wopen.albumservice.utils.WebContextHolder;
@@ -11,6 +13,7 @@ import wopen.albumservice.utils.WebContextHolder;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
 
@@ -38,6 +41,11 @@ public class UserServiceImpl implements UserService {
         User user = getCurrentUser();
         user.update(command);
         userRepo.save(user);
+    }
+
+    @Override
+    public UserStats getUserStats(User user) {
+        return null;
     }
 
     private User getCurrentUser() {

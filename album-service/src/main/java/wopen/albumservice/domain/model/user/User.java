@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import wopen.albumservice.utils.$;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -20,6 +20,7 @@ import java.util.UUID;
 @ToString
 @Getter
 @Entity
+@Table(name = "Users")
 @NaturalIdCache
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -43,8 +44,11 @@ public class User implements Serializable {
     @Nationalized
     private String bio;
     private String bannerUrl;
-    @Column(nullable = false)
-    private Instant signUpAt;
+    @Column(nullable = false, updatable = false)
+    private Instant joinedAt;
+
+    @Embedded
+    private UserStats stats;
 
     private Boolean enabled = true;
     private Boolean locked = false;
@@ -55,7 +59,7 @@ public class User implements Serializable {
         user.password = password;
         user.username = $.uuidString();
         user.nickname = "新用户" + RandomStringUtils.randomNumeric(6);
-        user.signUpAt = Instant.now();
+        user.joinedAt = Instant.now();
 
         return user;
     }

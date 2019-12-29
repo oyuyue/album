@@ -13,6 +13,7 @@ import './index.scss'
 interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   overlay?: ReactNode
   trigger?: 'click'
+  autoHide?: boolean
   vertical?: 'top' | 'bottom'
   horizontal?: 'left' | 'right'
 }
@@ -20,6 +21,7 @@ interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
 const Dropdown: FC<DropdownProps> = ({
   children,
   overlay,
+  autoHide = false,
   trigger = 'click',
   vertical = 'top',
   horizontal = 'left'
@@ -31,7 +33,10 @@ const Dropdown: FC<DropdownProps> = ({
 
   useEffect(() => {
     function handler(ev: DocumentEventMap['click']): void {
-      if (!ref.current.contains(ev.target as Node)) {
+      if (
+        !ref.current.contains(ev.target as Node) ||
+        (menuRef.current.contains(ev.target as Node) && autoHide)
+      ) {
         set(false)
       } else if (!menuRef.current.contains(ev.target as Node)) {
         set(s => !s)
@@ -40,7 +45,7 @@ const Dropdown: FC<DropdownProps> = ({
     setH(ref.current.offsetHeight)
     document.addEventListener(trigger, handler)
     return () => document.removeEventListener(trigger, handler)
-  }, [trigger])
+  }, [autoHide, trigger])
 
   return (
     <div ref={ref} className="dropdown">

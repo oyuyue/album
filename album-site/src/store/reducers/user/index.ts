@@ -16,7 +16,7 @@ export enum UserKey {
 }
 
 interface UserState {
-  detail: User
+  details: User
   photos: Photo[]
   albums: Album[]
   albumPhotos: Photo[]
@@ -26,7 +26,7 @@ interface UserState {
 
 const userReducer: Reducer<UserState, KeyAction<UserKey>> = (
   state = {
-    detail: {},
+    details: {},
     photos: [],
     albums: [],
     albumPhotos: [],
@@ -37,7 +37,7 @@ const userReducer: Reducer<UserState, KeyAction<UserKey>> = (
 ) => {
   switch (type) {
     case SET_USER:
-      return { ...state, user: { ...payload } }
+      return { ...state, details: { ...payload } }
     case SET_USER_STUFFS:
       return { ...state, [key]: [...payload] }
     case ADD_MORE_USER_STUFFS:

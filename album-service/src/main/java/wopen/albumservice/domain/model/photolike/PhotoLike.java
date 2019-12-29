@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @ToString
 @Entity
+@Table(name = "Photo_Likes")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PhotoLike implements Serializable {

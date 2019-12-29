@@ -4,7 +4,8 @@ import React, {
   Children,
   ReactElement,
   ReactNode,
-  useCallback
+  useCallback,
+  useMemo
 } from 'react'
 import { push } from 'connected-react-router'
 import clsx from 'clsx'
@@ -25,7 +26,10 @@ const Menu: FC<MenuProps> = ({
   pure = false,
   ...rest
 }) => {
-  const childs = Children.toArray(children as ReactElement)
+  const childs = useMemo(
+    () => Children.toArray(children as ReactElement).filter(x => isObject(x)),
+    [children]
+  )
   const dispatch = useDispatch()
   const itemClickHandler = useCallback(
     (i: number) => (ev: Event) => {
@@ -44,44 +48,42 @@ const Menu: FC<MenuProps> = ({
 
   return (
     <ul {...rest} className={clsx('menu', pure && 'menu-pure', className)}>
-      {childs
-        .filter(x => isObject(x))
-        .map(
-          (
-            {
-              key,
-              props: { children, icon, color, variant, suffixIcon, ...rest }
-            },
-            i
-          ) => (
-            <li
-              {...rest}
-              onClick={itemClickHandler(i)}
-              key={key || i}
-              className={clsx(
-                'menu_item',
-                color && `menu_item-${color}`,
-                variant && `menu_item-${variant}`
-              )}
-            >
-              {icon && (
-                <FontAwesomeIcon
-                  className="menu_item_icon-p"
-                  fixedWidth
-                  icon={icon}
-                />
-              )}
-              <div className="menu_item_content">{children}</div>
-              {suffixIcon && (
-                <FontAwesomeIcon
-                  className="menu_item_icon-s"
-                  fixedWidth
-                  icon={suffixIcon}
-                />
-              )}
-            </li>
-          )
-        )}
+      {childs.map(
+        (
+          {
+            key,
+            props: { children, icon, color, variant, suffixIcon, ...rest }
+          },
+          i
+        ) => (
+          <li
+            {...rest}
+            onClick={itemClickHandler(i)}
+            key={key || i}
+            className={clsx(
+              'menu_item',
+              color && `menu_item-${color}`,
+              variant && `menu_item-${variant}`
+            )}
+          >
+            {icon && (
+              <FontAwesomeIcon
+                className="menu_item_icon-p"
+                fixedWidth
+                icon={icon}
+              />
+            )}
+            <div className="menu_item_content">{children}</div>
+            {suffixIcon && (
+              <FontAwesomeIcon
+                className="menu_item_icon-s"
+                fixedWidth
+                icon={suffixIcon}
+              />
+            )}
+          </li>
+        )
+      )}
     </ul>
   )
 }

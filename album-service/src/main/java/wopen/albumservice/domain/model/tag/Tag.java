@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @ToString
 @Entity
+@Table(name = "Tags")
 @NaturalIdCache
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

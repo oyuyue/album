@@ -14,5 +14,10 @@ public class UserDto {
     private String avatarUrl;
     private String bio;
     private String bannerUrl;
-    private Instant signUpAt;
+    private Instant joinedAt;
+    private long photoCount;
+    private long albumCount;
+    private long likeCount;
+    private long viewedCount;
+    private long likedCount;
 }

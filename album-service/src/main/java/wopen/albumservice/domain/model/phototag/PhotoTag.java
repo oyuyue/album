@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @ToString
 @Entity
+@Table(name = "Photo_Tags")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PhotoTag implements Serializable {
     @EmbeddedId

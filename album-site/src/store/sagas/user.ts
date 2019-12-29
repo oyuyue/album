@@ -77,10 +77,8 @@ function* userStuffSaga() {
 }
 
 function* fetchDetail({ payload }: PayloadAction) {
-  try {
-    const res = yield call(fetchUser, payload)
-    yield put(setUser(res))
-  } catch (error) {}
+  const res = yield call(fetchUser, payload)
+  yield put(setUser(res))
 }
 
 export default function*() {

@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @ToString
 @Entity
+@Table(name = "Album_Categories")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AlbumCategory implements Serializable {
     @EmbeddedId

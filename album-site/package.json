@@ -10,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.6",
     "clsx": "^1.0.4",
     "connected-react-router": "^6.6.1",
+    "dayjs": "^1.8.18",
     "history": "^4.10.1",
     "lodash-es": "^4.17.15",
     "normalize.css": "^8.0.1",

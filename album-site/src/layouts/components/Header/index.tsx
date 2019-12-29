@@ -8,12 +8,19 @@ import { useDispatch } from 'react-redux'
 import { toggleSidebar, logout } from 'store/actions'
 import './index.scss'
 import useShallowSelector from 'hooks/useShallowSelector'
-import { isLogged } from 'store/reducers/account'
+import {
+  isLogged,
+  selectMyUsername,
+  selectMyAvatar
+} from 'store/reducers/account'
+import Avatar from 'components/Avatar'
 
 const Header: FC = () => {
   const dispatch = useDispatch()
   const toggle = useCallback(() => dispatch(toggleSidebar()), [dispatch])
   const logged = useShallowSelector(isLogged)
+  const username = useShallowSelector(selectMyUsername)
+  const avatarUrl = useShallowSelector(selectMyAvatar)
   const logoutHandler = useCallback(() => {
     dispatch(logout())
   }, [dispatch])
@@ -49,10 +56,19 @@ const Header: FC = () => {
         )}
         <div className="header_user">
           <Dropdown
+            autoHide
             overlay={
               <Menu pure>
-                {logged && <Item icon="user">个人中心</Item>}
-                {logged && <Item icon="cog">设置</Item>}
+                {logged && (
+                  <Item to={`/users/${username}`} icon="user">
+                    个人中心
+                  </Item>
+                )}
+                {logged && (
+                  <Item to={`/users/${username}/settings`} icon="cog">
+                    设置
+                  </Item>
+                )}
                 <Item variant="divider" />
                 {logged && (
                   <Item onClick={logoutHandler} icon="sign-out-alt">
@@ -69,7 +85,11 @@ const Header: FC = () => {
             horizontal="right"
             vertical="top"
           >
-            <Button className="header_toggle" icon="user" size="big" />
+            {logged ? (
+              <Avatar url={avatarUrl} />
+            ) : (
+              <Button className="header_toggle" icon="user" size="big" />
+            )}
           </Dropdown>
         </div>
       </div>

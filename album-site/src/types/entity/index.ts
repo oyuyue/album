@@ -5,14 +5,25 @@ export interface Banner {
   desc?: string
 }
 
+export enum Gender {
+  UNKNOWN = 'UNKNOWN',
+  MALE = 'MALE',
+  FEMALE = 'FEMALE'
+}
 export interface User {
   id?: string
+  username?: string
   nickname?: string
   avatarUrl?: string
-  gender?: number
+  bannerUrl?: string
+  gender?: Gender
   bio?: string
+  joinedAt?: string
   photoCount?: number
   albumCount?: number
+  likeCount?: number
+  viewedCount?: number
+  likedCount?: number
 }
 
 export interface Tag {

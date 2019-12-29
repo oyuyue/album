@@ -164,7 +164,7 @@ const Carousel: <T extends {}>(
                   )}
                 </div>
               ) : (
-                <Skeleton height="100%" />
+                <Skeleton />
               )}
             </animated.div>
           )
