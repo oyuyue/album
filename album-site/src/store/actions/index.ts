@@ -50,7 +50,9 @@ import {
   SIGN_UP,
   CHANGE_STATE,
   LOGIN,
-  CHANGE_PASSWORD
+  CHANGE_PASSWORD,
+  LOGOUT,
+  UNSET_MY_DETAILS
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -105,10 +107,12 @@ export const toggleTheme = makeAC(UI_TOGGLE_THEME)
 export const fetchMyDetails = makeAC(FETCH_MY_DETAILS)
 export const fetchToken = makeAC(FETCH_TOKEN)
 export const setMyDetails = makePAC(SET_MY_DETAILS)
+export const unsetMyDetails = makeAC(UNSET_MY_DETAILS)
 export const sendCaptcha = makePAC(SEND_CAPTCHA)
 export const signUp = makePAC(SIGN_UP)
 export const changePassword = makePAC(CHANGE_PASSWORD)
 export const login = makePAC(LOGIN)
+export const logout = makeAC(LOGOUT)
 
 const makeStateAction = (state: StateType) => (key: string) => ({
   type: CHANGE_STATE,

@@ -1,4 +1,4 @@
-import { spawn } from 'redux-saga/effects'
+import { spawn, all, call } from 'redux-saga/effects'
 import banner from './banner'
 import photo from './photo'
 import album from './album'
@@ -9,12 +9,18 @@ import user from './user'
 import account from './account'
 
 export default function*() {
-  yield spawn(photo)
-  yield spawn(banner)
-  yield spawn(album)
-  yield spawn(tag)
-  yield spawn(category)
-  yield spawn(search)
-  yield spawn(user)
-  yield spawn(account)
+  yield all(
+    [photo, banner, album, tag, category, search, user, account].map(saga =>
+      spawn(function*() {
+        while (true) {
+          try {
+            yield call(saga)
+            break
+          } catch (error) {
+            console.error(error)
+          }
+        }
+      })
+    )
+  )
 }

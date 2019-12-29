@@ -50,11 +50,11 @@ function getHeadersAndBody(
 function responseReturn(res: Response, key?: keyof Response) {
   if (key) {
     if (isFunction(res[key])) return (res[key] as Function)()
-    return res[key]
+    return Promise.resolve(res[key])
   }
 
   const len = res.headers.get('content-length')
-  if (parseInt(len) === 0) return {}
+  if (parseInt(len) === 0) return Promise.resolve({})
 
   const type = res.headers.get('content-type')
   if (type && type.startsWith('application/json')) return res.json()

@@ -5,6 +5,7 @@ interface ItemProps extends HTMLAttributes<HTMLLIElement> {
   icon?: FontAwesomeIconProps['icon']
   suffixIcon?: FontAwesomeIconProps['icon']
   variant?: 'divider'
+  to?: string
 }
 
 const Item: FC<ItemProps> = () => null

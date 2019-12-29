@@ -2,6 +2,7 @@ import { Reducer } from 'redux'
 import { PayloadAction } from 'types/store'
 import { User } from 'types/entity'
 import { SET_MY_DETAILS, UNSET_MY_DETAILS } from 'store/constants'
+import { RootState } from '..'
 
 interface AccountState {
   logged: boolean
@@ -24,5 +25,7 @@ const accountReducer: Reducer<AccountState, PayloadAction> = (
       return state
   }
 }
+
+export const isLogged = ({ account: { logged } }: RootState) => logged
 
 export default accountReducer

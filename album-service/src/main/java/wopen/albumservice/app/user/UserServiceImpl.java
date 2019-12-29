@@ -1,6 +1,7 @@
 package wopen.albumservice.app.user;
 
 import org.springframework.stereotype.Service;
+import wopen.albumservice.domain.model.user.UpdateUserCommand;
 import wopen.albumservice.domain.model.user.User;
 import wopen.albumservice.domain.model.user.UserRepo;
 import wopen.albumservice.exception.AuthException;
@@ -24,7 +25,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getMyDetails() {
+        return getCurrentUser();
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepo.findByUsername(username).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public void updateUser(UpdateUserCommand command) {
+        User user = getCurrentUser();
+        user.update(command);
+        userRepo.save(user);
+    }
+
+    private User getCurrentUser() {
         String email = WebContextHolder.getCurrentUser().orElseThrow(AuthException::new).getUsername();
-       return userRepo.findByEmail(email).orElseThrow(UserNotFoundException::new);
+        return userRepo.findByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 }

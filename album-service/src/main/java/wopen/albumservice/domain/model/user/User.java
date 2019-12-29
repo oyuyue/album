@@ -1,6 +1,7 @@
 package wopen.albumservice.domain.model.user;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @ToString
+@Getter
 @Entity
 @NaturalIdCache
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -86,5 +88,14 @@ public class User implements Serializable {
 
     public void changePassword(String password) {
         this.password = password;
+    }
+
+    public void update(UpdateUserCommand command) {
+        this.username = command.getUsername();
+        this.gender = command.getGender();
+        this.nickname = command.getNickname();
+        this.avatarUrl = command.getAvatarUrl();
+        this.bio = command.getBio();
+        this.bannerUrl = command.getBannerUrl();
     }
 }

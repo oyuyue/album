@@ -5,6 +5,7 @@ import {
   sendEmailCaptcha,
   signUp as signUpApi,
   login as loginApi,
+  logout as logoutApi,
   fetchMyDetails as fetchMyDetailsApi,
   changePassword as changePasswordApi
 } from 'api'
@@ -14,10 +15,11 @@ import {
   SEND_CAPTCHA,
   SIGN_UP,
   LOGIN,
-  CHANGE_PASSWORD
+  CHANGE_PASSWORD,
+  LOGOUT
 } from 'store/constants'
 import { setAccessToken } from 'utils/storage'
-import { setMyDetails } from 'store/actions'
+import { setMyDetails, unsetMyDetails } from 'store/actions'
 import { PayloadAction } from 'types/store'
 import { stateful } from './utils'
 
@@ -66,10 +68,16 @@ function* login({ payload }: PayloadAction) {
   }
 }
 
+function* logout() {
+  yield call(logoutApi)
+  yield put(unsetMyDetails())
+}
+
 export default function*() {
   yield takeLeading(FETCH_TOKEN, fetchToken)
   yield takeLeading(FETCH_MY_DETAILS, fetchMyDetails)
   yield takeLeading(SEND_CAPTCHA, sendCaptcha)
+  yield takeLeading(LOGOUT, logout)
   yield takeLeading(SIGN_UP, stateful(signUp))
   yield takeLeading(CHANGE_PASSWORD, stateful(changePassword))
   yield takeLeading(LOGIN, stateful(login))
