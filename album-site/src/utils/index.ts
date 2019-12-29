@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux'
-import { isString, omitBy, isNil, isObject } from 'lodash-es'
+import { isString, omitBy, isNil, isObject, reject } from 'lodash-es'
 
 const images = [
   "\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Cg %3E%3Ccircle fill='%23000000' cx='400' cy='400' r='600'/%3E%3Ccircle fill='%23180d1c' cx='400' cy='400' r='500'/%3E%3Ccircle fill='%23261431' cx='400' cy='400' r='400'/%3E%3Ccircle fill='%23351947' cx='400' cy='400' r='300'/%3E%3Ccircle fill='%23451e5e' cx='400' cy='400' r='200'/%3E%3Ccircle fill='%23552277' cx='400' cy='400' r='100'/%3E%3C/g%3E%3C/svg%3E\"",
@@ -70,4 +70,17 @@ export function mimeCheck(mime: string, toCheck: string): boolean {
   if (et !== t) return false
   if (ev === '*') return true
   return ev === v
+}
+
+export function fileToUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onloadend = function({ target: { result } }) {
+      resolve(result as string)
+    }
+    reader.onerror = function(error) {
+      reject(error)
+    }
+    reader.readAsDataURL(file)
+  })
 }

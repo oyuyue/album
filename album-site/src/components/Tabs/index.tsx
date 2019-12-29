@@ -14,7 +14,7 @@ import React, {
 import clsx from 'clsx'
 import Typography from 'components/Typography'
 import './index.scss'
-import { isObject } from 'lodash-es'
+import { isObject, isNil } from 'lodash-es'
 
 interface TabsProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   children?: ReactNode
@@ -67,7 +67,7 @@ const Tabs: FC<TabsProps> = ({
             )}
           >
             {children}
-            {sub && (
+            {!isNil(sub) && (
               <Typography className="tabs_item_sub" variant="caption">
                 {sub}
               </Typography>

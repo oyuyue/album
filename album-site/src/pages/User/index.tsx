@@ -12,11 +12,12 @@ import selectUserDetails from 'store/selector'
 import { Gender } from 'types/entity'
 import { useDispatch } from 'react-redux'
 import { fetchUser } from 'store/actions'
+import Skeleton from 'components/Skeleton'
 import Avatar from 'components/Avatar'
 import Albums from './components/Albums'
 import Settings from './components/Settings'
 import './index.scss'
-import Skeleton from 'components/Skeleton'
+import EditProfile from './components/EditProfile'
 
 function renderGenderIcon(gender: Gender) {
   const icon =
@@ -39,6 +40,7 @@ const User: FC<RouteComponentProps<{ id: string; type: string }>> = ({
     params: { id, type = UserKey.PHOTOS }
   }
 }) => {
+  const [editPopShow, setEditPopShow] = useState(false)
   const [defaultBg] = useState(randomImage)
   const dispatch = useDispatch()
   const switchHandler = useCallback(
@@ -48,6 +50,8 @@ const User: FC<RouteComponentProps<{ id: string; type: string }>> = ({
     [id, push]
   )
   const details = useShallowSelector(selectUserDetails)
+  const editPopExitHandler = useCallback(() => setEditPopShow(false), [])
+  const editPopShowHandler = useCallback(() => setEditPopShow(true), [])
 
   useEffect(() => {
     dispatch(fetchUser(id))
@@ -74,7 +78,11 @@ const User: FC<RouteComponentProps<{ id: string; type: string }>> = ({
                 <Typography className="p_user_info_joined" variant="caption">
                   {day(details.joinedAt).format('YYYY/MM/DD')} 加入
                 </Typography>
-                {details.logged && <Button icon="cog">编辑资料</Button>}
+                {details.logged && (
+                  <Button icon="cog" onClick={editPopShowHandler}>
+                    编辑资料
+                  </Button>
+                )}
               </div>
               <Typography variant="body2" className="p_user_bio">
                 {details.bio}
@@ -116,6 +124,7 @@ const User: FC<RouteComponentProps<{ id: string; type: string }>> = ({
             {details.logged && <Tab value="settings">设置</Tab>}
           </Tabs>
         )}
+        {editPopShow && <EditProfile onExited={editPopExitHandler} />}
       </section>
       <section className="p_user_content">
         <Switch>
