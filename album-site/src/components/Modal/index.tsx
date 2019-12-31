@@ -10,7 +10,7 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
   title?: string
   noFooter?: boolean
   noCancel?: boolean
-  maskClose?: boolean
+  maskNotClose?: boolean
   onConfirm?: () => void
   onCancel?: () => void
   onExited?: () => void
@@ -29,7 +29,7 @@ let Modal: FC<ModalProps> & {
   onConfirm,
   onCancel,
   onExited,
-  maskClose = true,
+  maskNotClose = false,
   autoClose = true,
   noCancel,
   show = false
@@ -62,9 +62,9 @@ let Modal: FC<ModalProps> & {
   ])
   const onMaskClick = useCallback(
     (e: MouseEvent | any) => {
-      if (maskClose) cancelHandler(e)
+      if (!maskNotClose) cancelHandler(e)
     },
-    [cancelHandler, maskClose]
+    [cancelHandler, maskNotClose]
   )
 
   return (

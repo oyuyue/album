@@ -10,4 +10,7 @@ public class Messages {
     public static final String WRONG_CAPTCHA = "error.wrong-captcha";
     public static final String CHANGE_PASSWORD_FAILED = "error.change-password";
     public static final String RELOGIN = "error.relogin";
+    public static final String ILLEGAL_FILE_TYPE = "error.illegal-file-type";
+    public static final String UPLOAD_FAILED = "error.upload-failed";
+    public static final String RESOURCE_NOT_FOUND = "error.resource-not-found";
 }

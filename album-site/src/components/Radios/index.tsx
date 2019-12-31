@@ -24,9 +24,9 @@ const Radios: FC<RadiosProps> = ({
       <div className="radios_inner">
         {Children.map(
           children as ReactElement,
-          ({ key, props: { children } }) => (
+          ({ key, props: { children, value } }) => (
             <label key={key}>
-              <input name={name} type="radio" />
+              <input name={name} type="radio" value={value} />
               <div className="radios_content">
                 <div className="radios_icon"></div>
                 <Typography variant="caption">{children}</Typography>

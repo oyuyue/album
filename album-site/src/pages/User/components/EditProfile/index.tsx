@@ -6,6 +6,8 @@ import Input from 'components/Input'
 import Radios, { Radio } from 'components/Radios'
 import './index.scss'
 import { fileToUrl } from 'utils'
+import useForm from 'hooks/useForm'
+import { Gender } from 'types/entity'
 
 interface EditProfileProps {
   onExited?: () => void
@@ -16,6 +18,11 @@ type imageData = { url?: string; file?: File }
 const EditProfile: FC<EditProfileProps> = ({ onExited }) => {
   const [banner, setBanner] = useState<imageData>({})
   const [avatar, setAvatar] = useState<imageData>({})
+  const [bind, form] = useForm()
+
+  const submitHandler = useCallback(() => {
+    console.log(form.value())
+  }, [form])
 
   const imageHandler = useCallback(
     (isBanner: boolean) => (file: File) => {
@@ -28,8 +35,13 @@ const EditProfile: FC<EditProfileProps> = ({ onExited }) => {
 
   return (
     <div className="pu_profile">
-      <Modal title="编辑资料" onExited={onExited}>
-        <form className="pu_profile_content">
+      <Modal
+        maskNotClose
+        onConfirm={submitHandler}
+        title="编辑资料"
+        onExited={onExited}
+      >
+        <form {...bind} className="pu_profile_content">
           <Upload onChange={imageHandler(true)}>
             {banner.url ? (
               <img
@@ -61,8 +73,8 @@ const EditProfile: FC<EditProfileProps> = ({ onExited }) => {
           <Input label="昵称" required name="nickname" maxLen={50} />
           <Input label="简介" name="bio" textarea maxLen={160} />
           <Radios name="gender" label="性别">
-            <Radio>男</Radio>
-            <Radio>女</Radio>
+            <Radio value={Gender.MALE}>男</Radio>
+            <Radio value={Gender.FEMALE}>女</Radio>
           </Radios>
         </form>
       </Modal>

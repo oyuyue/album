@@ -1,5 +1,7 @@
 import { FC } from 'react'
-
-const Radio: FC = () => null
+interface RadioProps {
+  value?: any
+}
+const Radio: FC<RadioProps> = () => null
 
 export default Radio
