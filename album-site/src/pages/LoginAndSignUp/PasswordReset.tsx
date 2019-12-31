@@ -4,22 +4,23 @@ import Input from 'components/Input'
 import Button from 'components/Button'
 import CaptchaCountDown from 'components/CaptchaCountDown'
 import { useDispatch } from 'react-redux'
-import { sendCaptcha, signUp } from 'store/actions'
+import { sendRetrievePasswordCaptcha } from 'store/actions'
 import useForm from 'hooks/useForm'
 import Notification from 'components/Notification'
 import Spin from 'components/Spin'
 import useShallowSelector from 'hooks/useShallowSelector'
 import { isLoading } from 'store/reducers/state'
-import { SIGN_UP } from 'store/constants'
+import { RETRIEVE_PASSWORD } from 'store/constants'
+import { retrievePassword } from 'api'
 
 const PasswordReset: FC = () => {
   const [bind, form] = useForm()
   const dispatch = useDispatch()
-  const loading = useShallowSelector(isLoading(SIGN_UP))
+  const loading = useShallowSelector(isLoading(RETRIEVE_PASSWORD))
   const captchaHandler = useCallback(() => {
     const res = form.report('email')
     if (res) {
-      dispatch(sendCaptcha(form.value('email')))
+      dispatch(sendRetrievePasswordCaptcha(form.value('email')))
     }
     return res
   }, [dispatch, form])
@@ -32,7 +33,7 @@ const PasswordReset: FC = () => {
         if (values.password !== values.repassword) {
           Notification.error('两次密码不一致')
         } else {
-          dispatch(signUp(values))
+          dispatch(retrievePassword(values))
         }
       }
     },
@@ -49,7 +50,7 @@ const PasswordReset: FC = () => {
           label="邮箱"
           placeholder="请输入邮箱地址"
         />
-        <CaptchaCountDown onGetCaptcha={captchaHandler} />
+        <CaptchaCountDown name="captcha" onGetCaptcha={captchaHandler} />
         <Input
           required
           type="password"
@@ -59,7 +60,7 @@ const PasswordReset: FC = () => {
         />
         <Input
           required
-          name="password"
+          name="repassword"
           type="password"
           gapBottom="big"
           label="确认密码"

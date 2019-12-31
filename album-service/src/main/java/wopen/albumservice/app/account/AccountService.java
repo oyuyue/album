@@ -1,8 +1,16 @@
 package wopen.albumservice.app.account;
 
+import wopen.albumservice.domain.model.user.ChangeEmailCommand;
+import wopen.albumservice.domain.model.user.RetrievePasswordCommand;
+import wopen.albumservice.domain.model.user.SignUpCommand;
+
 public interface AccountService {
     void sendSignUpCaptcha(String email);
-    void signUp(String email, String password, String captcha);
+    void sendRetrievePasswordCaptcha(String email);
+    void signUp(SignUpCommand command);
+    void retrievePassword(RetrievePasswordCommand command);
 
-    void changePassword(String password);
+    void sendChangeEmailCaptcha(String email);
+
+    void changeEmail(ChangeEmailCommand command);
 }

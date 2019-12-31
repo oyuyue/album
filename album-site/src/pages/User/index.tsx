@@ -26,9 +26,9 @@ function renderGenderIcon(gender: Gender) {
   return (
     icon && (
       <FontAwesomeIcon
-        className={`{p_user_gender p_user_gender-${gender}}`}
+        className={`p_user_gender p_user_gender-${icon}`}
         size="lg"
-        icon="mars"
+        icon={icon}
       />
     )
   )
@@ -63,7 +63,7 @@ const User: FC<RouteComponentProps<{ id: string; type: string }>> = ({
         <div
           className="p_user_banner"
           style={{
-            backgroundImage: details.bannerUrl || `url(${defaultBg})`
+            backgroundImage: `url(${details.bannerUrl || defaultBg})`
           }}
         />
         {!details.username ? (

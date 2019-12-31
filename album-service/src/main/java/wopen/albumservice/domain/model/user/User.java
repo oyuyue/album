@@ -95,11 +95,14 @@ public class User implements Serializable {
     }
 
     public void update(UpdateUserCommand command) {
-        this.username = command.getUsername();
         this.gender = command.getGender();
         this.nickname = command.getNickname();
         this.avatarUrl = command.getAvatarUrl();
         this.bio = command.getBio();
         this.bannerUrl = command.getBannerUrl();
+    }
+
+    public void changeEmail(String newEmail) {
+        this.email = newEmail;
     }
 }

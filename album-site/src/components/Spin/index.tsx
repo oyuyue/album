@@ -7,15 +7,17 @@ interface SpinProps {
   children?: ReactNode
   spinning?: boolean
   size?: 'small' | 'middle' | 'big'
+  className?: string
 }
 
 const Spin: FC<SpinProps> = ({
   spinning = true,
   size = 'middle',
-  children
+  children,
+  className
 }) => {
   return (
-    <div className={clsx('spin', children && 'spin-posed')}>
+    <div className={clsx('spin', children && 'spin-posed', className)}>
       <div className="spin_mask" hidden={!spinning}>
         <FontAwesomeIcon
           size={size === 'small' ? '1x' : size === 'big' ? '3x' : '2x'}

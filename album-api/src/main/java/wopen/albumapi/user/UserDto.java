@@ -2,6 +2,7 @@ package wopen.albumapi.user;
 
 import lombok.Data;
 import wopen.albumservice.domain.model.user.Gender;
+import wopen.albumservice.utils.$;
 
 import java.time.Instant;
 
@@ -20,4 +21,8 @@ public class UserDto {
     private long likeCount;
     private long viewedCount;
     private long likedCount;
+
+    public String getEmail() {
+        return $.maskEmail(email);
+    }
 }

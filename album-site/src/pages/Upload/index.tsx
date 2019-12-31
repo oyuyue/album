@@ -64,7 +64,7 @@ const EditPhoto: FC = () => {
             textarea
             label="标题"
             placeholder="请输入"
-            maxLen={100}
+            maxLength={100}
             gapBottom="small"
             round
           />

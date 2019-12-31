@@ -5,18 +5,32 @@ import {
   put,
   fork,
   take,
+  all,
   cancel
 } from 'redux-saga/effects'
 import { batchActions } from 'redux-batched-actions'
 import {
   FETCH_MORE_USER_STUFFS,
   FETCH_USER_STUFFS,
-  FETCH_USER
+  FETCH_USER,
+  CHANGE_USER_PROFILE
 } from 'store/constants'
-import { addMoreUserStuffs, setUserStuffs, setUser } from 'store/actions'
-import { fetchUserPhotos, fetchUserAlbums, fetchUser } from 'api'
+import {
+  addMoreUserStuffs,
+  setUserStuffs,
+  setUser,
+  fetchMyDetails
+} from 'store/actions'
+import {
+  fetchUserPhotos,
+  fetchUserAlbums,
+  fetchUser,
+  uploadImage as uploadImageApi,
+  updateMyProfile
+} from 'api'
 import user, { UserKey } from 'store/reducers/user'
 import { KeyAction, PayloadAction } from 'types/store'
+import { stateful } from './utils'
 
 function* userStuffSaga() {
   let loadMoreTask = null
@@ -77,11 +91,46 @@ function* userStuffSaga() {
 }
 
 function* fetchDetail({ payload }: PayloadAction) {
-  const res = yield call(fetchUser, payload)
-  yield put(setUser(res))
+  let res = {}
+  try {
+    res = yield call(fetchUser, payload)
+  } catch (error) {
+  } finally {
+    yield put(setUser(res))
+  }
+}
+
+function* uploadImage(file: File) {
+  if (!file) return
+  const data = new FormData()
+  data.append('file', file)
+  const { url }: { url: string } = yield call(uploadImageApi, data)
+  return url
+}
+
+function* changeUserProfile({
+  payload: { bannerFile, avatarFile, resolve, reject, ...rest }
+}: PayloadAction) {
+  try {
+    const [banner, avatar] = yield all([
+      uploadImage(bannerFile),
+      uploadImage(avatarFile)
+    ])
+
+    if (banner) rest.bannerUrl = banner
+    if (avatar) rest.avatarUrl = avatar
+
+    yield call(updateMyProfile, rest)
+    yield put(fetchMyDetails())
+    resolve(true)
+  } catch (error) {
+    console.error('update user profile error', error)
+    reject(error)
+  }
 }
 
 export default function*() {
   yield fork(userStuffSaga)
   yield takeLeading(FETCH_USER, fetchDetail)
+  yield takeLeading(CHANGE_USER_PROFILE, stateful(changeUserProfile))
 }

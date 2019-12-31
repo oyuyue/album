@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-import wopen.albumservice.api.handing.ApiError;
+import wopen.albumservice.handing.ApiError;
 import wopen.albumservice.infra.i18n.MessageTranslator;
 import wopen.albumservice.infra.i18n.Messages;
 

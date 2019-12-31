@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import Typography from 'components/Typography'
 import Button from 'components/Button'
 import './index.scss'
+import Spin from 'components/Spin'
 
 export interface ModalProps extends HTMLAttributes<HTMLElement> {
   title?: string
@@ -16,6 +17,7 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
   onExited?: () => void
   autoClose?: boolean
   show?: boolean
+  loading?: boolean
 }
 
 let Modal: FC<ModalProps> & {
@@ -32,7 +34,8 @@ let Modal: FC<ModalProps> & {
   maskNotClose = false,
   autoClose = true,
   noCancel,
-  show = false
+  show = false,
+  loading = false
 }) => {
   const [closed, setClosed] = useState(show)
 
@@ -62,9 +65,9 @@ let Modal: FC<ModalProps> & {
   ])
   const onMaskClick = useCallback(
     (e: MouseEvent | any) => {
-      if (!maskNotClose) cancelHandler(e)
+      if (!maskNotClose && !loading) cancelHandler(e)
     },
-    [cancelHandler, maskNotClose]
+    [cancelHandler, loading, maskNotClose]
   )
 
   return (
@@ -82,7 +85,7 @@ let Modal: FC<ModalProps> & {
           onExited={onExited}
           timeout={300}
         >
-          <div className="modal_content">
+          <Spin className="modal_content" spinning={loading}>
             {title && (
               <div className="modal_title">
                 <Typography variant="subtitle1">{title}</Typography>
@@ -102,7 +105,7 @@ let Modal: FC<ModalProps> & {
                 </Button>
               </div>
             )}
-          </div>
+          </Spin>
         </CSSTransition>
       </div>
     </div>

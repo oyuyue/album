@@ -48,8 +48,9 @@
   &_inner {
     position: absolute;
     left: 50%;
-    top: 20%;
+    top: 5%;
     transform: translateX(-50%);
+    overflow: hidden;
   }
 
   &_content {
@@ -64,6 +65,7 @@
     border-radius: rem(10px);
     background: rgba(255,255,255,.8);
     box-shadow: 0 3px 15px rgba(0,0,0,.2);
+    overflow: hidden;
   }
 
   &_title {

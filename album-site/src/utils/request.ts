@@ -39,6 +39,8 @@ function getHeadersAndBody(
         body = JSON.stringify(payload)
       } catch (error) {}
     }
+  } else {
+    body = undefined
   }
 
   return {
@@ -52,6 +54,8 @@ function responseReturn(res: Response, key?: keyof Response) {
     if (isFunction(res[key])) return (res[key] as Function)()
     return Promise.resolve(res[key])
   }
+
+  console.log(res)
 
   const len = res.headers.get('content-length')
   if (parseInt(len) === 0) return Promise.resolve({})
@@ -94,7 +98,6 @@ export function request(
     .catch(err => {
       if (rawResponse) return Promise.reject(err)
       return responseReturn(err, returnType).then((data: any) => {
-        console.log(data)
         return Promise.reject(data)
       })
     })

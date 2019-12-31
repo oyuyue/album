@@ -1,8 +1,8 @@
 package wopen.albumservice.app.user;
 
+import wopen.albumservice.domain.model.user.ChangePasswordCommand;
 import wopen.albumservice.domain.model.user.UpdateUserCommand;
 import wopen.albumservice.domain.model.user.User;
-import wopen.albumservice.domain.model.user.UserStats;
 
 import java.util.Optional;
 
@@ -15,5 +15,12 @@ public interface UserService {
 
     void updateUser(UpdateUserCommand command);
 
-    UserStats getUserStats(User user);
+    User getCurrentUser();
+
+    void changePassword(ChangePasswordCommand command);
+    void changePassword(String password);
+
+    User signUp(String email, String password);
+
+    void changeEmail(String newEmail);
 }

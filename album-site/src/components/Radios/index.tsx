@@ -12,6 +12,7 @@ const Radios: FC<RadiosProps> = ({
   children,
   className,
   label,
+  defaultValue,
   name = 'radios'
 }) => {
   return (
@@ -26,7 +27,14 @@ const Radios: FC<RadiosProps> = ({
           children as ReactElement,
           ({ key, props: { children, value } }) => (
             <label key={key}>
-              <input name={name} type="radio" value={value} />
+              <input
+                name={name}
+                type="radio"
+                defaultChecked={
+                  defaultValue != undefined && defaultValue === value
+                }
+                value={value}
+              />
               <div className="radios_content">
                 <div className="radios_icon"></div>
                 <Typography variant="caption">{children}</Typography>

@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -25,14 +24,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final RestAuthenticationFailureHandler restAuthenticationFailureHandler;
     private final UserDetailsService dbUserDetailsService;
     private final ObjectMapper objectMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public WebSecurityConfig(
             RestAuthenticationFailureHandler restAuthenticationFailureHandler,
-            RestAuthenticationSuccessHandler restAuthenticationSuccessHandler, UserDetailsService dbUserDetailsService, ObjectMapper objectMapper) {
+            RestAuthenticationSuccessHandler restAuthenticationSuccessHandler, UserDetailsService dbUserDetailsService, ObjectMapper objectMapper, PasswordEncoder passwordEncoder) {
         this.restAuthenticationFailureHandler = restAuthenticationFailureHandler;
         this.restAuthenticationSuccessHandler = restAuthenticationSuccessHandler;
         this.dbUserDetailsService = dbUserDetailsService;
         this.objectMapper = objectMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -69,13 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     AccountAuthenticationProvider accountAuthenticationProvider() {
-        return new AccountAuthenticationProvider(passwordEncoder(), dbUserDetailsService);
+        return new AccountAuthenticationProvider(passwordEncoder, dbUserDetailsService);
     }
 
     private Filter accountAuthenticationFilter(AuthenticationManager authenticationManager) {

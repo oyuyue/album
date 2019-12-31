@@ -4,7 +4,7 @@ import Input from 'components/Input'
 import Button from 'components/Button'
 import CaptchaCountDown from 'components/CaptchaCountDown'
 import { useDispatch } from 'react-redux'
-import { sendCaptcha, signUp } from 'store/actions'
+import { sendSignUpCaptcha, signUp } from 'store/actions'
 import useForm from 'hooks/useForm'
 import Notification from 'components/Notification'
 import Spin from 'components/Spin'
@@ -19,7 +19,7 @@ const SignUp: FC = () => {
   const captchaHandler = useCallback(() => {
     const res = form.report('email')
     if (res) {
-      dispatch(sendCaptcha(form.value('email')))
+      dispatch(sendSignUpCaptcha(form.value('email')))
     }
     return res
   }, [dispatch, form])

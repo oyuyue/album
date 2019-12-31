@@ -4,7 +4,8 @@ import React, {
   useCallback,
   useState,
   ReactNode,
-  InputHTMLAttributes
+  InputHTMLAttributes,
+  ChangeEvent
 } from 'react'
 import clsx from 'clsx'
 import './index.scss'
@@ -16,7 +17,6 @@ export interface InputProps
   size?: 'small' | 'big'
   label?: string | number
   textarea?: boolean
-  maxLen?: number
   gapBottom?: 'small' | 'midden' | 'big'
   round?: boolean
   prefix?: ReactNode
@@ -29,15 +29,27 @@ const Input: FC<InputProps> = ({
   label,
   textarea = false,
   round = false,
-  maxLen,
+  maxLength,
   gapBottom,
+  onChange,
   prefix,
   suffix,
   ...rest
 }) => {
   const [focus, setFocus] = useState(false)
+  const [count, setCount] = useState(0)
   const onFocus = useCallback(() => setFocus(true), [])
   const onBlur = useCallback(() => setFocus(false), [])
+
+  const changeHandler = useCallback(
+    (ev: ChangeEvent<HTMLElement>) => {
+      if (typeof maxLength === 'number') {
+        setCount((ev.currentTarget as any).value.length)
+      }
+      onChange && onChange(ev)
+    },
+    [maxLength, onChange]
+  )
 
   const C: any = textarea ? 'textarea' : 'input'
   return (
@@ -63,13 +75,15 @@ const Input: FC<InputProps> = ({
             {...rest}
             onFocus={onFocus}
             onBlur={onBlur}
+            onChange={changeHandler}
+            maxLength={maxLength}
             className={clsx('input_inp', C === 'textarea' && 'input_textarea')}
           />
           {suffix}
         </div>
-        {maxLen && (
+        {maxLength && (
           <Typography className="input_len" variant="caption">
-            0/{maxLen}
+            {count}/{maxLength}
           </Typography>
         )}
       </div>

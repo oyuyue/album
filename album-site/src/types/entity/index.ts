@@ -12,6 +12,7 @@ export enum Gender {
 }
 export interface User {
   id?: string
+  email?: string
   username?: string
   nickname?: string
   avatarUrl?: string

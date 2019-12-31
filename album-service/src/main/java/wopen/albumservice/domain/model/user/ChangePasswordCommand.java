@@ -1,4 +1,4 @@
-package wopen.albumapi.account;
+package wopen.albumservice.domain.model.user;
 
 import lombok.Data;
 
@@ -8,4 +8,6 @@ import javax.validation.constraints.NotBlank;
 public class ChangePasswordCommand {
     @NotBlank
     private String password;
+    @NotBlank
+    private String newPassword;
 }

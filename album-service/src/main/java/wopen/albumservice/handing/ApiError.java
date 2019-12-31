@@ -1,4 +1,4 @@
-package wopen.albumservice.api.handing;
+package wopen.albumservice.handing;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

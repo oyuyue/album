@@ -37,5 +37,11 @@ export const selectMyAvatar = ({
     details: { avatarUrl }
   }
 }: RootState) => avatarUrl
+export const selectMyEmail = ({
+  account: {
+    details: { email }
+  }
+}: RootState) => email
+export const selectMyDetails = ({ account: { details } }: RootState) => details
 
 export default accountReducer

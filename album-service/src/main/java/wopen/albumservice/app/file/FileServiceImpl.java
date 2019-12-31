@@ -1,13 +1,15 @@
 package wopen.albumservice.app.file;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import wopen.albumservice.exception.*;
+import wopen.albumservice.exception.BadUploadFileException;
+import wopen.albumservice.exception.InternalServerException;
+import wopen.albumservice.exception.ResourceNotFoundException;
+import wopen.albumservice.exception.UploadFailedException;
 import wopen.albumservice.infra.i18n.Messages;
 import wopen.albumservice.properties.AppProperties;
 import wopen.albumservice.properties.UploadProperties;
@@ -53,8 +55,8 @@ public class FileServiceImpl implements FileService, InitializingBean {
         Path file = rootLocation.resolve(fileName);
         try {
             Resource resource = new UrlResource(file.toUri());
-            if (resource.exists()) throw new ResourceNotFoundException();
-            if (resource.isReadable()) throw new InternalServerException();
+            if (!resource.exists()) throw new ResourceNotFoundException();
+            if (!resource.isReadable()) throw new InternalServerException();
             return resource;
         } catch (MalformedURLException e) {
             log.error("加载资源失败", e);
@@ -63,9 +65,7 @@ public class FileServiceImpl implements FileService, InitializingBean {
     }
 
     private String getResultUrl(String fileName) {
-        String urlPrefix = uploadProperties.getUrlPrefix();
-        if (!urlPrefix.endsWith("/")) urlPrefix += "/";
-        return urlPrefix + fileName;
+        return $.concatUrl(uploadProperties.getUrlPrefix(), fileName);
     }
 
     private String getFileExtension(String fileName) {

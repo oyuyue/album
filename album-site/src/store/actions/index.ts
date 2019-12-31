@@ -46,13 +46,18 @@ import {
   FETCH_MY_DETAILS,
   FETCH_TOKEN,
   SET_MY_DETAILS,
-  SEND_CAPTCHA,
+  SEND_SIGN_UP_CAPTCHA,
   SIGN_UP,
   CHANGE_STATE,
   LOGIN,
   CHANGE_PASSWORD,
   LOGOUT,
-  UNSET_MY_DETAILS
+  UNSET_MY_DETAILS,
+  CHANGE_USER_PROFILE,
+  CHANGE_EMAIL,
+  SEND_RETRIEVE_PASSWORD_CAPTCHA,
+  RETRIEVE_PASSWORD,
+  SEND_CHANGE_EMAIL_CAPTCHA
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -108,9 +113,16 @@ export const fetchMyDetails = makeAC(FETCH_MY_DETAILS)
 export const fetchToken = makeAC(FETCH_TOKEN)
 export const setMyDetails = makePAC(SET_MY_DETAILS)
 export const unsetMyDetails = makeAC(UNSET_MY_DETAILS)
-export const sendCaptcha = makePAC(SEND_CAPTCHA)
+export const changeUserProfile = makePAC(CHANGE_USER_PROFILE)
+export const sendSignUpCaptcha = makePAC(SEND_SIGN_UP_CAPTCHA)
+export const sendRetrievePasswordCaptcha = makePAC(
+  SEND_RETRIEVE_PASSWORD_CAPTCHA
+)
+export const sendChangeEmailCaptcha = makePAC(SEND_CHANGE_EMAIL_CAPTCHA)
+export const retrievePassword = makePAC(RETRIEVE_PASSWORD)
 export const signUp = makePAC(SIGN_UP)
 export const changePassword = makePAC(CHANGE_PASSWORD)
+export const changeEmail = makePAC(CHANGE_EMAIL)
 export const login = makePAC(LOGIN)
 export const logout = makeAC(LOGOUT)
 
