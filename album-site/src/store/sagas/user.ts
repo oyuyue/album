@@ -25,11 +25,11 @@ import {
   fetchUserPhotos,
   fetchUserAlbums,
   fetchUser,
-  uploadImage as uploadImageApi,
   updateMyProfile
 } from 'api'
 import user, { UserKey } from 'store/reducers/user'
 import { KeyAction, PayloadAction } from 'types/store'
+import { uploadImage } from './upload'
 import { stateful } from './utils'
 
 function* userStuffSaga() {
@@ -98,14 +98,6 @@ function* fetchDetail({ payload }: PayloadAction) {
   } finally {
     yield put(setUser(res))
   }
-}
-
-function* uploadImage(file: File) {
-  if (!file) return
-  const data = new FormData()
-  data.append('file', file)
-  const { url }: { url: string } = yield call(uploadImageApi, data)
-  return url
 }
 
 function* changeUserProfile({

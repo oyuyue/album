@@ -5,6 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import wopen.albumservice.exception.BadUploadFileException;
 import wopen.albumservice.exception.InternalServerException;
@@ -21,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
+@Transactional
 @Slf4j
 public class FileServiceImpl implements FileService, InitializingBean {
     private final UploadProperties uploadProperties;

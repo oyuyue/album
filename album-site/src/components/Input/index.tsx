@@ -18,6 +18,7 @@ export interface InputProps
   label?: string | number
   textarea?: boolean
   gapBottom?: 'small' | 'midden' | 'big'
+  gapTop?: 'small' | 'midden' | 'big'
   round?: boolean
   prefix?: ReactNode
   suffix?: ReactNode
@@ -31,6 +32,7 @@ const Input: FC<InputProps> = ({
   round = false,
   maxLength,
   gapBottom,
+  gapTop,
   onChange,
   prefix,
   suffix,
@@ -58,6 +60,7 @@ const Input: FC<InputProps> = ({
         'input',
         size && `input-${size}`,
         gapBottom && `input-mb${gapBottom}`,
+        gapTop && `input-mt${gapTop}`,
         focus && 'input-focus',
         round && 'input-round',
         className

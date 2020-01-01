@@ -8,7 +8,7 @@ import {
   take
 } from 'redux-saga/effects'
 import { batchActions } from 'redux-batched-actions'
-import { fetchAlbums, fetchAlbum, fetchPhotos } from 'api'
+import { fetchAlbums, fetchAlbum, fetchPhotos, upsertAlbum } from 'api'
 import browse, { selectReqParams } from 'store/reducers/album/browse'
 import detail from 'store/reducers/album/detail'
 import {
@@ -16,7 +16,9 @@ import {
   FETCH_ALBUMS,
   FETCH_MORE_ALBUM_PHOTOS,
   FETCH_ALBUM,
-  FETCH_ALBUM_PHOTOS
+  FETCH_ALBUM_PHOTOS,
+  EDIT_ALBUM,
+  FETCH_EDIT_ALBUM
 } from 'store/constants'
 import {
   addMoreAlbums,
@@ -24,9 +26,14 @@ import {
   changeAlbumsParams,
   setAlbum,
   addMoreAlbumPhotos,
-  setAlbumPhotos
+  setAlbumPhotos,
+  fetchUserStuffs,
+  setEditAlbum
 } from 'store/actions'
 import { PayloadAction } from 'types/store'
+import { UserKey, selectUserUsername } from 'store/reducers/user'
+import { uploadImage } from './upload'
+import { stateful } from './utils'
 
 function* fetchBrowse() {
   let loadMoreTask = null
@@ -142,8 +149,32 @@ function* fetchDetail({ payload }: PayloadAction) {
   } catch (error) {}
 }
 
+function* fetchEditAlbum({ payload }: PayloadAction) {
+  const res = yield call(fetchAlbum, payload)
+  yield put(setEditAlbum(res))
+}
+
+function* editAlbum({
+  payload: { file, resolve, reject, ...rest }
+}: PayloadAction) {
+  try {
+    const url = yield call(uploadImage, file)
+    if (url) rest.imageUrl = url
+    yield call(upsertAlbum, rest)
+    const username = yield select(selectUserUsername)
+    if (username) {
+      yield put(fetchUserStuffs(UserKey.ALBUMS, username))
+    }
+    resolve && resolve(true)
+  } catch (error) {
+    reject && reject(error)
+  }
+}
+
 export default function*() {
   yield fork(fetchBrowse)
   yield fork(fetchDetailPhotos)
+  yield takeLeading(FETCH_EDIT_ALBUM, stateful(fetchEditAlbum))
   yield takeLeading(FETCH_ALBUM, fetchDetail)
+  yield takeLeading(EDIT_ALBUM, stateful(editAlbum))
 }

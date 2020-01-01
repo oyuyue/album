@@ -57,7 +57,10 @@ import {
   CHANGE_EMAIL,
   SEND_RETRIEVE_PASSWORD_CAPTCHA,
   RETRIEVE_PASSWORD,
-  SEND_CHANGE_EMAIL_CAPTCHA
+  SEND_CHANGE_EMAIL_CAPTCHA,
+  EDIT_ALBUM,
+  FETCH_EDIT_ALBUM,
+  SET_EDIT_ALBUM
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -98,6 +101,9 @@ export const fetchMoreAlbumPhotos = makeAC(FETCH_MORE_ALBUM_PHOTOS)
 export const setAlbum = makePAC(SET_ALBUM)
 export const setAlbumPhotos = makePAC(SET_ALBUM_PHOTOS)
 export const addMoreAlbumPhotos = makePAC(ADD_MORE_ALBUM_PHOTOS)
+export const editAlbum = makePAC(EDIT_ALBUM)
+export const fetchEditAlbum = makePAC(FETCH_EDIT_ALBUM)
+export const setEditAlbum = makePAC(SET_EDIT_ALBUM)
 
 export const fetchUser = makePAC(FETCH_USER)
 export const setUser = makePAC(SET_USER)

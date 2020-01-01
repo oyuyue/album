@@ -4,19 +4,15 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Nationalized;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
-import wopen.albumservice.domain.model.albumcategory.AlbumCategory;
+import org.hibernate.annotations.*;
 import wopen.albumservice.domain.model.user.User;
 import wopen.albumservice.domain.shared.Audit;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 @ToString
@@ -40,11 +36,26 @@ public class Album implements Serializable {
     @Embedded
     private Audit audit = new Audit();
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AlbumCategory> categories = new HashSet<>();
-
     @ManyToOne
     private User user;
+
+    public Album(UpsertAlbumCommand command, User user) {
+        this.albumId = AlbumId.next();
+        this.imageUrl = command.getImageUrl();
+        this.title = command.getTitle();
+        this.personal = command.getPersonal();
+        this.user = user;
+    }
+
+    public void update(UpsertAlbumCommand command) {
+        this.title = command.getTitle();
+        this.imageUrl = command.getImageUrl();
+        this.personal = command.getPersonal();
+    }
+
+    public AlbumId getAlbumId() {
+        return albumId;
+    }
 
     @Override
     public boolean equals(Object o) {

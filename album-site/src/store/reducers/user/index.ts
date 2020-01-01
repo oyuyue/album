@@ -7,6 +7,7 @@ import {
   ADD_MORE_USER_STUFFS
 } from 'store/constants'
 import stateableAndPageable from 'store/hors/stateableAndPageable'
+import { RootState } from '..'
 
 export enum UserKey {
   PHOTOS = 'photos',
@@ -46,5 +47,13 @@ const userReducer: Reducer<UserState, KeyAction<UserKey>> = (
       return state
   }
 }
+
+export const selectUserUsername = ({
+  user: {
+    state: {
+      details: { username }
+    }
+  }
+}: RootState) => username
 
 export default stateableAndPageable(userReducer, 'user')

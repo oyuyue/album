@@ -25,6 +25,18 @@
   &-mbbig {
     margin-bottom: rem(20px);
   }
+  
+  &-mtsmall {
+    margin-top: rem(5px);
+  }
+
+  &-mtmidden {
+    margin-top: rem(10px);
+  }
+
+  &-mtbig {
+    margin-top: rem(20px);
+  }
 
   &_box {
     display: flex;

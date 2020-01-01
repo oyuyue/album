@@ -55,6 +55,7 @@ export interface Photo {
 export interface Album {
   id?: string
   imageUrl?: string
+  personal?: boolean
   title?: string
   createdTime?: number
   updatedTime?: number

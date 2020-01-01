@@ -34,7 +34,9 @@ import {
   faExclamationTriangle,
   faCameraRetro,
   faSignOutAlt,
-  faSignInAlt
+  faSignInAlt,
+  faImage,
+  faFolderPlus
 } from '@fortawesome/free-solid-svg-icons'
 import { faWeixin } from '@fortawesome/free-brands-svg-icons'
 
@@ -75,6 +77,8 @@ export default (): void => {
     faExclamationTriangle,
     faCameraRetro,
     faSignInAlt,
-    faSignOutAlt
+    faSignOutAlt,
+    faImage,
+    faFolderPlus
   )
 }

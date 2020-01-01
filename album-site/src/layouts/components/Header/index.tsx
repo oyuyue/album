@@ -42,6 +42,25 @@ const Header: FC = () => {
         <Button className="header_search_btn" size="big" icon="search" />
       </div>
       <div className="header_actions">
+        {logged && (
+          <Dropdown
+            autoHide
+            overlay={
+              <Menu pure>
+                <Item to="/edit/photos" icon="image">
+                  上传图片
+                </Item>
+                <Item to="/edit/albums" icon="folder-plus">
+                  新增相册
+                </Item>
+              </Menu>
+            }
+            horizontal="right"
+            vertical="top"
+          >
+            <Button className="header_add" icon="plus" size="big" />
+          </Dropdown>
+        )}
         {!logged && (
           <Link to="/account/signup">
             <Button variant="contained">注册</Button>

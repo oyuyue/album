@@ -1,0 +1,12 @@
+.pw {
+  @include flex(space-between);
+  margin: rem(10px) 0;
+
+  &_label {
+    @include flex(space-between);
+  }
+
+  &_icon {
+    margin-right: rem(5px);
+  }
+}

@@ -13,6 +13,7 @@ import Album from 'pages/Album'
 import Search from 'pages/Search'
 import LoginAndSignUp from 'pages/LoginAndSignUp'
 import Upload from 'pages/Upload'
+import AlbumEdit from 'pages/AlbumEdit'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import CachedSwitch from './components/CachedSwitch'
@@ -40,6 +41,7 @@ const Layout: FC = () => {
           <Route path="/search/:type?" component={Search} />
           <Route path="/upload/:type/:id?" renderPrev component={Upload} />
           <Route path="/account/:type" renderPrev component={LoginAndSignUp} />
+          <Route path="/edit/albums/:id?" renderPrev component={AlbumEdit} />
         </CachedSwitch>
       </div>
     </>

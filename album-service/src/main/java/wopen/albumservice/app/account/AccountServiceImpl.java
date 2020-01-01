@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wopen.albumservice.app.user.UserService;
 import wopen.albumservice.domain.model.user.ChangeEmailCommand;
 import wopen.albumservice.domain.model.user.RetrievePasswordCommand;
@@ -15,6 +16,7 @@ import wopen.albumservice.messaging.EmailSender;
 import java.time.Duration;
 
 @Service
+@Transactional
 public class AccountServiceImpl implements AccountService {
     private static final String CAPTCHA_SIGN_UP = "captcha:signUp:";
     private static final String CAPTCHA_RETRIEVE_PASSWORD = "captcha:retrievePassword:";

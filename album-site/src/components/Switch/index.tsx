@@ -1,10 +1,12 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, InputHTMLAttributes } from 'react'
 import './index.scss'
 
-const Switch: FC = () => {
+export interface SwitchProps extends InputHTMLAttributes<{}> {}
+
+const Switch: FC<SwitchProps> = ({ ...rest }) => {
   return (
     <label className="switch">
-      <input className="switch_input" type="checkbox" />
+      <input {...rest} className="switch_input" type="checkbox" />
       <div className="switch_inner">
         <div className="switch_inner_thumb" />
       </div>
