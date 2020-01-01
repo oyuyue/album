@@ -1,8 +1,8 @@
 package wopen.albumapi.user;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.web.bind.annotation.*;
 import wopen.albumservice.app.user.UserService;
-import wopen.albumservice.domain.model.user.ChangePasswordCommand;
 import wopen.albumservice.domain.model.user.UpdateUserCommand;
 import wopen.albumservice.domain.model.user.User;
 import wopen.albumservice.properties.AppProperties;
@@ -42,10 +42,10 @@ public class UserController {
     }
 
     private UserDto addUrlPrefix(UserDto dto) {
-        if (dto.getAvatarUrl() != null) {
+        if (Strings.isNotBlank(dto.getAvatarUrl())) {
             dto.setAvatarUrl($.concatUrl(urlPrefix, dto.getAvatarUrl()));
         }
-        if (dto.getBannerUrl() != null) {
+        if (Strings.isNotBlank(dto.getBannerUrl())) {
             dto.setBannerUrl($.concatUrl(urlPrefix, dto.getBannerUrl()));
         }
         return dto;

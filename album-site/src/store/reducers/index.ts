@@ -11,6 +11,7 @@ import user from './user'
 import ui from './ui'
 import account from './account'
 import state from './state'
+import list from './list'
 
 export type RootState = {
   router: RouterState
@@ -24,6 +25,7 @@ export type RootState = {
   ui: ReturnType<typeof ui>
   account: ReturnType<typeof account>
   state: ReturnType<typeof state>
+  list: ReturnType<typeof list>
 }
 
 export default function createRootReducers(history: History) {
@@ -38,6 +40,7 @@ export default function createRootReducers(history: History) {
     user,
     ui,
     account,
-    state
+    state,
+    list
   })
 }

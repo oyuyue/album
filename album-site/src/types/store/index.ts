@@ -18,3 +18,8 @@ export interface PageableAction<T = any> extends Action {
 export interface KeyAction<T extends string = string> extends PayloadAction {
   key?: T
 }
+
+export interface ListAction<T = any> extends Action {
+  loadMore?: boolean
+  payload?: T
+}

@@ -1,10 +1,18 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useEffect } from 'react'
 import Menu, { Item } from 'components/Menu'
 import Switch from 'components/Switch'
-import ActionCard from '../ActionCard'
 import './index.scss'
+import { useDispatch } from 'react-redux'
+import { fetchUserStuffs } from 'store/actions'
+import { UserKey } from 'store/reducers/user'
+import ActionCard from '../ActionCard'
 
 const Albums: FC = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchUserStuffs(UserKey.ALBUMS))
+  }, [dispatch])
+
   return (
     <div className="pu_albums">
       <ActionCard

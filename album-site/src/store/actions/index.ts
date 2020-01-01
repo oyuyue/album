@@ -60,7 +60,9 @@ import {
   SEND_CHANGE_EMAIL_CAPTCHA,
   EDIT_ALBUM,
   FETCH_EDIT_ALBUM,
-  SET_EDIT_ALBUM
+  SET_EDIT_ALBUM,
+  CHANGE_LIST,
+  CHANGE_LIST_STATUS
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -131,6 +133,9 @@ export const changePassword = makePAC(CHANGE_PASSWORD)
 export const changeEmail = makePAC(CHANGE_EMAIL)
 export const login = makePAC(LOGIN)
 export const logout = makeAC(LOGOUT)
+
+export const changeList = makePAC(CHANGE_LIST)
+export const changeListStatus = makePAC(CHANGE_LIST_STATUS)
 
 const makeStateAction = (state: StateType) => (key: string) => ({
   type: CHANGE_STATE,
