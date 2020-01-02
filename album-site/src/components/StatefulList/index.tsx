@@ -7,31 +7,34 @@ import Divider from 'components/Divider'
 interface StatefulListProps {
   onReload?: ErrorReloadProps['onReload']
   onLoadMore?: LoadingProps['onLoadMore']
-  loadingError?: LoadingProps['error']
-  reloadError?: boolean
-  isDone?: boolean
+  initError?: boolean
+  error?: boolean
+  done?: boolean
   empty?: boolean
   children?: ReactNode
 }
 
 const StatefulList: FC<StatefulListProps> = ({
   children,
-  reloadError = false,
-  isDone = false,
+  error = false,
+  done = false,
   empty = false,
   onReload,
-  loadingError,
+  initError,
   onLoadMore
 }) => {
   return (
     <div>
-      {reloadError && <ErrorReload onReload={onReload} />}
+      {initError && <ErrorReload onReload={onReload} />}
       {children}
-      {empty && <Result type="empty" subTitle="暂无数据" />}
-      {!isDone && !reloadError && !empty && (
-        <Loading error={loadingError} onLoadMore={onLoadMore} />
-      )}
-      {isDone && !reloadError && !empty && <Divider>到底了</Divider>}
+      {!initError &&
+        (empty ? (
+          <Result type="empty" subTitle="暂无数据" />
+        ) : done ? (
+          <Divider>到底了</Divider>
+        ) : (
+          <Loading error={error} onLoadMore={onLoadMore} />
+        ))}
     </div>
   )
 }

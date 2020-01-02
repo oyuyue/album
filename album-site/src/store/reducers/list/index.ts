@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 import { PayloadAction } from 'types/store'
-import { CHANGE_LIST } from 'store/constants'
+import { CHANGE_LIST, CHANGE_LIST_STATUS } from 'store/constants'
 import { RootState } from '..'
 
 export enum StatusType {
@@ -9,10 +9,10 @@ export enum StatusType {
   SUCCESS
 }
 
-type ReqParams = {
+export type ReqParams = {
   page: number
   size: number
-  sort: string
+  sort?: string
 }
 
 type StateState = {
@@ -24,7 +24,7 @@ type StateState = {
   }
 }
 
-export const defaultReqParams = {
+export const defaultReqParams: ReqParams = {
   page: 0,
   size: 12
 }
@@ -36,6 +36,11 @@ const listReducer: Reducer<StateState, PayloadAction> = (
   switch (type) {
     case CHANGE_LIST:
       return { ...state, ...payload }
+    case CHANGE_LIST_STATUS:
+      return {
+        ...state,
+        [payload.key]: { ...state[payload.key], status: payload.status }
+      }
     default:
       return state
   }
@@ -45,6 +50,24 @@ export const selectReqParams = (key: string) => ({ list }: RootState) => {
   const res = list[key]
   if (res && res.reqParams) return res.reqParams
   return { ...defaultReqParams }
+}
+
+export const hasMore = (key: string) => ({ list }: RootState) => {
+  const res = list[key]
+  if (!res || res.hasMore == null) return true
+  return res.hasMore
+}
+
+export const isListError = (key: string) => ({ list }: RootState) => {
+  const res = list[key]
+  if (!res) return false
+  return res.status === StatusType.ERROR
+}
+
+export const isListInitError = (key: string) => ({ list }: RootState) => {
+  const res = list[key]
+  if (!res) return false
+  return res.status === StatusType.INIT_ERROR
 }
 
 export default listReducer

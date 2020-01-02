@@ -1,5 +1,5 @@
 import { SearchKey } from 'store/reducers/search'
-import { makeAC, makePAC, makeKAC } from 'store/helpers'
+import { makeAC, makePAC, makeKAC, makeLAC } from 'store/helpers'
 import { UserKey } from 'store/reducers/user'
 import { BP } from 'setup/setupMediaQuery'
 import { StateType } from 'store/reducers/state'
@@ -62,7 +62,9 @@ import {
   FETCH_EDIT_ALBUM,
   SET_EDIT_ALBUM,
   CHANGE_LIST,
-  CHANGE_LIST_STATUS
+  CHANGE_LIST_STATUS,
+  FETCH_USER_ALBUMS,
+  SET_USER_ALBUMS
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -112,6 +114,8 @@ export const setUser = makePAC(SET_USER)
 export const fetchUserStuffs = makeKAC<UserKey>(FETCH_USER_STUFFS)
 export const setUserStuffs = makeKAC<UserKey>(SET_USER_STUFFS)
 export const addMoreUserStuffs = makeKAC<UserKey>(ADD_MORE_USER_STUFFS)
+export const fetchUserAlbums = makeLAC(FETCH_USER_ALBUMS)
+export const setUserAlbums = makeLAC(SET_USER_ALBUMS)
 
 export const changeBP = makePAC<BP>(UI_CHANGE_BP)
 export const toggleSidebar = makeAC(UI_TOGGLE_SIDEBAR)

@@ -30,12 +30,9 @@ const Recommend: FC = () => {
       <StatefulList
         onReload={reloadHandler}
         onLoadMore={loadMoreHandler}
-        reloadError={
-          status === StateableStatus.INIT_ERROR && content.length === 0
-        }
         empty={content.length === 0 && !hasMore}
-        loadingError={status === StateableStatus.ERROR}
-        isDone={!hasMore}
+        initError={status === StateableStatus.ERROR}
+        done={!hasMore}
       >
         <div className="discover_items">
           {content.map(x => (

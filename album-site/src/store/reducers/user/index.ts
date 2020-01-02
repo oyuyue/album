@@ -1,12 +1,7 @@
 import { Reducer } from 'redux'
-import { KeyAction } from 'types/store'
+import { ListAction } from 'types/store'
 import { User, Photo, Album } from 'types/entity'
-import {
-  SET_USER,
-  SET_USER_STUFFS,
-  ADD_MORE_USER_STUFFS
-} from 'store/constants'
-import stateableAndPageable from 'store/hors/stateableAndPageable'
+import { SET_USER, SET_USER_ALBUMS } from 'store/constants'
 import { RootState } from '..'
 
 export enum UserKey {
@@ -25,7 +20,7 @@ interface UserState {
   settings: {}
 }
 
-const userReducer: Reducer<UserState, KeyAction<UserKey>> = (
+const userReducer: Reducer<UserState, ListAction> = (
   state = {
     details: {},
     photos: [],
@@ -34,15 +29,16 @@ const userReducer: Reducer<UserState, KeyAction<UserKey>> = (
     favorites: [],
     settings: {}
   },
-  { type, payload, key }
+  { type, payload, loadMore }
 ) => {
   switch (type) {
     case SET_USER:
       return { ...state, details: { ...payload } }
-    case SET_USER_STUFFS:
-      return { ...state, [key]: [...payload] }
-    case ADD_MORE_USER_STUFFS:
-      return { ...state, [key]: [...state[key], ...payload] }
+    case SET_USER_ALBUMS:
+      return {
+        ...state,
+        albums: loadMore ? [...state.albums, ...payload] : [...payload]
+      }
     default:
       return state
   }
@@ -50,10 +46,10 @@ const userReducer: Reducer<UserState, KeyAction<UserKey>> = (
 
 export const selectUserUsername = ({
   user: {
-    state: {
-      details: { username }
-    }
+    details: { username }
   }
 }: RootState) => username
 
-export default stateableAndPageable(userReducer, 'user')
+export const selectUserAlbums = ({ user: { albums } }: RootState) => albums
+
+export default userReducer

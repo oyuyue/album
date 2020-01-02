@@ -13,13 +13,15 @@ import {
   FETCH_MORE_USER_STUFFS,
   FETCH_USER_STUFFS,
   FETCH_USER,
-  CHANGE_USER_PROFILE
+  CHANGE_USER_PROFILE,
+  FETCH_USER_ALBUMS
 } from 'store/constants'
 import {
   addMoreUserStuffs,
   setUserStuffs,
   setUser,
-  fetchMyDetails
+  fetchMyDetails,
+  setUserAlbums
 } from 'store/actions'
 import {
   fetchUserPhotos,
@@ -27,10 +29,11 @@ import {
   fetchUser,
   updateMyProfile
 } from 'api'
-import user, { UserKey } from 'store/reducers/user'
-import { KeyAction, PayloadAction } from 'types/store'
+import user, { UserKey, selectUserUsername } from 'store/reducers/user'
+import { KeyAction, PayloadAction, ListAction } from 'types/store'
+import { ReqParams } from 'store/reducers/list'
 import { uploadImage } from './upload'
-import { stateful } from './utils'
+import { stateful, list } from './utils'
 
 function* userStuffSaga() {
   let loadMoreTask = null
@@ -121,8 +124,22 @@ function* changeUserProfile({
   }
 }
 
+function* fetchUserAlbumsSaga(
+  { payload, loadMore }: ListAction,
+  reqParams: ReqParams
+) {
+  const username = yield select(selectUserUsername)
+  const res = yield call(fetchUserAlbums, username, {
+    ...reqParams,
+    ...payload
+  })
+  yield put(setUserAlbums(loadMore, res.content))
+  return res
+}
+
 export default function*() {
   yield fork(userStuffSaga)
   yield takeLeading(FETCH_USER, fetchDetail)
   yield takeLeading(CHANGE_USER_PROFILE, stateful(changeUserProfile))
+  yield takeLeading(FETCH_USER_ALBUMS, list(fetchUserAlbumsSaga))
 }

@@ -38,6 +38,9 @@ export function list<Fn extends (...args: any[]) => any>(
         reqParams = yield select(selectReqParams(action.type))
         reqParams.page += 1
       }
+      if (action.payload && action.payload.sort) {
+        reqParams.sort = action.payload.sort
+      }
       const { totalElements, last } = yield call(fn as any, action, reqParams)
       yield put(
         changeList({
