@@ -15,5 +15,4 @@ public class Messages {
     public static final String RESOURCE_NOT_FOUND = "error.resource-not-found";
     public static final String CAPTCHA_EXIST = "error.captcha-exist";
     public static final String FORBIDDEN_OPERATION = "error.forbidden-operation";
-    public static final String DELETE_ALBUM_HAS_PHOTO = "error.delete-album-has-photo";
 }

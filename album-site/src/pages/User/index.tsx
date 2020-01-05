@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux'
 import { fetchUser } from 'store/actions'
 import Skeleton from 'components/Skeleton'
 import Avatar from 'components/Avatar'
-import Albums from './components/Albums'
 import Settings from './components/Settings'
 import './index.scss'
 import EditProfile from './components/EditProfile'
@@ -115,9 +114,6 @@ const User: FC<RouteComponentProps<{ id: string; type: string }>> = ({
             <Tab value={UserKey.PHOTOS} sub={details.photoCount}>
               相片
             </Tab>
-            <Tab value={UserKey.ALBUMS} sub={details.albumCount}>
-              相册
-            </Tab>
             <Tab value={UserKey.FAVORITES} sub={details.likeCount}>
               收藏
             </Tab>
@@ -128,7 +124,6 @@ const User: FC<RouteComponentProps<{ id: string; type: string }>> = ({
       </section>
       <section className="p_user_content">
         <Switch>
-          <Route path="/users/:id/albums" component={Albums} />
           <Route path="/users/:id/settings" component={Settings} />
         </Switch>
       </section>

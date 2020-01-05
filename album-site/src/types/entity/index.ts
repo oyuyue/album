@@ -40,27 +40,15 @@ export interface Category {
 }
 
 export interface Photo {
-  id: string
-  imageUrl: string
-  title: string
-  views: number
-  stars: number
-  createdTime?: number
-  updatedTime?: number
-  user?: User
-  album?: Album
-  tags?: Tag[]
-}
-
-export interface Album {
   id?: string
-  albumId?: string
-  imageUrl?: string
   personal?: boolean
+  photoId?: string
+  imageUrl?: string
   title?: string
+  views?: number
+  stars?: number
   createdTime?: number
   updatedTime?: number
-  photoCount?: number
-  photos?: Photo[]
   user?: User
+  tags?: Tag[]
 }

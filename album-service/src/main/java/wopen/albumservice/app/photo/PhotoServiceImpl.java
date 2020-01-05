@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wopen.albumservice.app.tag.TagService;
 import wopen.albumservice.app.user.UserService;
-import wopen.albumservice.domain.model.album.Album;
 import wopen.albumservice.domain.model.photo.*;
 import wopen.albumservice.domain.model.tag.Tag;
 import wopen.albumservice.domain.model.user.User;
@@ -39,11 +38,6 @@ public class PhotoServiceImpl implements PhotoService {
         if (photo.getPersonal() && isNotCurrentUser(photo.getUser())) throw new ResourceNotFoundException();
 
         return photo;
-    }
-
-    @Override
-    public long photoQuantity(Album album) {
-        return photoRepo.countByAlbum(album);
     }
 
     @Override

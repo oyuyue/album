@@ -1,20 +1,12 @@
 import React, { FC, memo } from 'react'
 import StatefulList from 'components/StatefulList'
 import useShallowSelector from 'hooks/useShallowSelector'
-import { SearchKey, selectContent } from 'store/reducers/search'
 import { readableTimeFormatter } from 'utils'
-import SearchItem from './SearchItem'
 
-interface ItemsProps {
-  type?: SearchKey
-}
-
-const Items: FC<ItemsProps> = ({ type = SearchKey.PHOTOS }) => {
-  const content = useShallowSelector(selectContent(type))
-
+const Items: FC = () => {
   return (
     <StatefulList>
-      {(content as any[]).map(
+      {/* {(content as any[]).map(
         ({
           id,
           title,
@@ -42,7 +34,7 @@ const Items: FC<ItemsProps> = ({ type = SearchKey.PHOTOS }) => {
             }
           />
         )
-      )}
+      )} */}
     </StatefulList>
   )
 }

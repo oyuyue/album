@@ -1,12 +1,10 @@
 .browse {
-  &_tabs {
-    margin: rem(30px) 0;
-  }
 
   &_filter {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: rem(30px);
 
     &_item {
       display: flex;

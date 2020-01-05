@@ -2,23 +2,14 @@ import React, { FC, memo, useCallback, useMemo } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { isString } from 'lodash-es'
 import Typography from 'components/Typography'
-import Tabs, { Tab } from 'components/Tabs'
 import Select, { Option } from 'components/Select'
 import { stringifyQuery } from 'utils'
 import Items from './Items'
 import TagSelect from './TagSelect'
 import './index.scss'
 
-export enum PathnameType {
-  ALBUMS = 'albums',
-  PHOTOS = 'photos'
-}
-
-const Browse: FC<RouteComponentProps<{ type: PathnameType }>> = ({
+const Browse: FC<RouteComponentProps> = ({
   history: { replace },
-  match: {
-    params: { type }
-  },
   location: { search, pathname }
 }) => {
   const { sort, tags } = useMemo(() => {
@@ -44,23 +35,11 @@ const Browse: FC<RouteComponentProps<{ type: PathnameType }>> = ({
     tags => replace(pathname + stringifyQuery({ tags, sort })),
     [pathname, replace, sort]
   )
-  const switchHandler = useCallback(
-    (v: PathnameType) => replace('/browse/' + v),
-    [replace]
-  )
 
   return (
     <article className="browse">
       <section className="browse_head">
         <Typography>浏览</Typography>
-        <Tabs
-          className="browse_tabs"
-          value={type || PathnameType.PHOTOS}
-          onChange={switchHandler}
-        >
-          <Tab value={PathnameType.PHOTOS}>相片</Tab>
-          <Tab value={PathnameType.ALBUMS}>相册</Tab>
-        </Tabs>
         <div className="browse_filter">
           <div className="browse_filter_item">
             <Typography
@@ -69,7 +48,7 @@ const Browse: FC<RouteComponentProps<{ type: PathnameType }>> = ({
             >
               筛选条件
             </Typography>
-            <TagSelect tags={tags} onChange={tagsChangeHandler} type={type} />
+            <TagSelect tags={tags} onChange={tagsChangeHandler} />
           </div>
           <div className="browse_filter_item">
             <Typography
@@ -89,7 +68,7 @@ const Browse: FC<RouteComponentProps<{ type: PathnameType }>> = ({
           </div>
         </div>
       </section>
-      <Items type={type} sort={sort} tags={tags} />
+      <Items sort={sort} tags={tags} />
     </article>
   )
 }

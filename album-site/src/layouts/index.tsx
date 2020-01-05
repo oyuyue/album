@@ -9,11 +9,9 @@ import Discover from 'pages/Discover'
 import Browse from 'pages/Browse'
 import Details from 'pages/Details'
 import User from 'pages/User'
-import Album from 'pages/Album'
 import Search from 'pages/Search'
 import LoginAndSignUp from 'pages/LoginAndSignUp'
 import Upload from 'pages/Upload'
-import AlbumEdit from 'pages/AlbumEdit'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import CachedSwitch from './components/CachedSwitch'
@@ -34,14 +32,12 @@ const Layout: FC = () => {
       >
         <CachedSwitch>
           <Route exact path="/" fallback component={Discover} />
-          <Route path="/browse/:type?" component={Browse} />
+          <Route path="/browse" component={Browse} />
           <Route path="/photos/:id" renderPrev component={Details} />
           <Route path="/users/:id/:type?" component={User} />
-          <Route path="/album" component={Album} />
           <Route path="/search/:type?" component={Search} />
           <Route path="/upload/:type/:id?" renderPrev component={Upload} />
           <Route path="/account/:type" renderPrev component={LoginAndSignUp} />
-          <Route path="/edit/albums/:id?" renderPrev component={AlbumEdit} />
         </CachedSwitch>
       </div>
     </>

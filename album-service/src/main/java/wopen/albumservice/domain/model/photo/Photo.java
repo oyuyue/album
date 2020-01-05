@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-import wopen.albumservice.domain.model.album.Album;
 import wopen.albumservice.domain.model.phototag.PhotoTag;
 import wopen.albumservice.domain.model.tag.Tag;
 import wopen.albumservice.domain.model.user.User;
@@ -52,9 +51,6 @@ public class Photo implements Serializable {
 
     @ManyToOne
     private User user;
-
-    @ManyToOne
-    private Album album;
 
     public Photo(UpsertPhotoCommand command, User user, Collection<Tag> tags) {
         this.user = user;

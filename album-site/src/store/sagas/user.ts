@@ -2,10 +2,15 @@ import { takeLeading, select, call, put, all } from 'redux-saga/effects'
 import {
   FETCH_USER,
   CHANGE_USER_PROFILE,
-  FETCH_USER_ALBUMS
+  FETCH_USER_PHOTOS
 } from 'store/constants'
-import { setUser, fetchMyDetails, setUserAlbums } from 'store/actions'
-import { fetchUserAlbums, fetchUser, updateMyProfile } from 'api'
+import {
+  setUser,
+  fetchMyDetails,
+  fetchUserPhotos,
+  setUserPhotos
+} from 'store/actions'
+import { fetchUserAlbums, fetchUser, updateMyProfile, fetchPhotos } from 'api'
 import { selectUserUsername } from 'store/reducers/user'
 import { PayloadAction, ListAction } from 'types/store'
 import { ReqParams } from 'store/reducers/list'
@@ -101,15 +106,15 @@ function* changeUserProfile({
   }
 }
 
-function* fetchUserAlbumsSaga(
+function* fetchUserPhotosSaga(
   { payload, loadMore }: ListAction,
   reqParams: ReqParams
 ) {
-  const res = yield call(fetchUserAlbums, {
+  const res = yield call(fetchPhotos, {
     ...reqParams,
     ...payload
   })
-  yield put(setUserAlbums(loadMore, res.content))
+  yield put(setUserPhotos(loadMore, res.content))
   return res
 }
 
@@ -117,5 +122,5 @@ export default function*() {
   // yield fork(userStuffSaga)
   yield takeLeading(FETCH_USER, fetchDetail)
   yield takeLeading(CHANGE_USER_PROFILE, stateful(changeUserProfile))
-  yield takeLeading(FETCH_USER_ALBUMS, list(fetchUserAlbumsSaga))
+  yield takeLeading(FETCH_USER_PHOTOS, list(fetchUserPhotosSaga))
 }

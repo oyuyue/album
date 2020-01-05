@@ -5,26 +5,40 @@ import {
   select,
   fork,
   take,
-  cancel
+  cancel,
+  all
 } from 'redux-saga/effects'
 import { batchActions } from 'redux-batched-actions'
-import { fetchPhotos } from 'api'
+import {
+  fetchPhotos,
+  fetchPhoto,
+  upsertPhoto,
+  deletePhoto,
+  changePhotoVisibility
+} from 'api'
 import browse, { selectReqParams } from 'store/reducers/photo/browse'
 import recommend from 'store/reducers/photo/recommend'
 import {
   FETCH_PHOTOS,
   FETCH_RECOMMEND_PHOTS,
   FETCH_MORE_RECOMMEND_PHOTS,
-  FETCH_MORE_PHOTOS
+  FETCH_MORE_PHOTOS,
+  FETCH_EDIT_PHOTO,
+  EDIT_PHOTO,
+  DELETE_PHOTO,
+  CHANGE_PHOTO_VISIBILITY
 } from 'store/constants'
 import {
   setPhotos,
   addMorePhotos,
   changePhotoParams,
   addMoreRecommendPhotos,
-  setRecommendPhotos
+  setRecommendPhotos,
+  setEditPhoto
 } from 'store/actions'
 import { PayloadAction } from 'types/store'
+import { uploadImage } from './upload'
+import { stateful } from './utils'
 
 function* fetchRecommend() {
   let loadMoreTask = null
@@ -127,7 +141,44 @@ function* fetchBrowse() {
   }
 }
 
+function* fetchEditPhoto({ payload }: PayloadAction) {
+  const res = yield call(fetchPhoto, payload)
+  yield put(setEditPhoto(res))
+}
+
+function* editPhoto({
+  payload: { imageFile, originImageFile, resolve, reject, ...rest }
+}: PayloadAction) {
+  try {
+    const [imageUrl, originImageUrl] = yield all([
+      uploadImage(imageFile),
+      uploadImage(originImageFile)
+    ])
+    if (imageUrl) rest.imageUrl = imageUrl
+    if (originImageUrl) rest.originImageUrl = originImageUrl
+    yield call(upsertPhoto, rest)
+    resolve && resolve(true)
+  } catch (error) {
+    reject && reject(error)
+  }
+}
+
+function* deletePhotoSaga({ payload }: PayloadAction) {
+  yield call(deletePhoto, payload)
+}
+
+function* changePhotoVisibilitySaga({ payload }: PayloadAction) {
+  yield call(changePhotoVisibility, payload)
+}
+
 export default function*() {
   yield fork(fetchRecommend)
   yield fork(fetchBrowse)
+  yield takeLeading(FETCH_EDIT_PHOTO, fetchEditPhoto)
+  yield takeLeading(EDIT_PHOTO, stateful(editPhoto))
+  yield takeLeading(DELETE_PHOTO, stateful(deletePhotoSaga))
+  yield takeLeading(
+    CHANGE_PHOTO_VISIBILITY,
+    stateful(changePhotoVisibilitySaga)
+  )
 }
