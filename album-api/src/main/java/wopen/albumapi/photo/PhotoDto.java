@@ -4,6 +4,7 @@ import lombok.Data;
 import wopen.albumservice.domain.model.photo.PhotoId;
 import wopen.albumservice.domain.model.tag.Tag;
 import wopen.albumservice.domain.model.user.User;
+import wopen.albumservice.utils.$;
 
 import java.time.Instant;
 import java.util.List;
@@ -21,4 +22,12 @@ public class PhotoDto {
     private Instant updatedAt;
     private List<Tag> tags;
     private User user;
+
+    public String getOriginImageUrl() {
+        return $.addUrlPrefix(originImageUrl);
+    }
+
+    public String getImageUrl() {
+        return $.addUrlPrefix(imageUrl);
+    }
 }

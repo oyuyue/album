@@ -5,10 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import wopen.albumapi.shared.IdDto;
-import wopen.albumservice.domain.model.photo.ChangePhotoVisibilityCommand;
-import wopen.albumservice.domain.model.photo.UpsertPhotoCommand;
 import wopen.albumservice.app.photo.PhotoService;
+import wopen.albumservice.domain.model.photo.ChangePhotoVisibilityCommand;
 import wopen.albumservice.domain.model.photo.Photo;
+import wopen.albumservice.domain.model.photo.UpsertPhotoCommand;
 
 import java.util.List;
 

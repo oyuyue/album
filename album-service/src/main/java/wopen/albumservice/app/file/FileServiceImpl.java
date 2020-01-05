@@ -46,7 +46,7 @@ public class FileServiceImpl implements FileService, InitializingBean {
         Path path = rootLocation.resolve(fileName);
         log.debug(path.toString());
         store(file, path);
-        return getResultUrl(fileName);
+        return fileName;
     }
 
     @Override
@@ -61,10 +61,6 @@ public class FileServiceImpl implements FileService, InitializingBean {
             log.error("加载资源失败", e);
             throw new InternalServerException();
         }
-    }
-
-    private String getResultUrl(String fileName) {
-        return $.addUrlPrefix(fileName);
     }
 
     private String getFileExtension(String fileName) {
