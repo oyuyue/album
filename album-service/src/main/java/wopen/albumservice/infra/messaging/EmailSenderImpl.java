@@ -1,4 +1,4 @@
-package wopen.albumservice.messaging;
+package wopen.albumservice.infra.messaging;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;

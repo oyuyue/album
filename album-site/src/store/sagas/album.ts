@@ -8,7 +8,13 @@ import {
   take
 } from 'redux-saga/effects'
 import { batchActions } from 'redux-batched-actions'
-import { fetchAlbums, fetchAlbum, fetchPhotos, upsertAlbum } from 'api'
+import {
+  fetchAlbums,
+  fetchAlbum,
+  fetchPhotos,
+  upsertAlbum,
+  deleteAlbum
+} from 'api'
 import browse, { selectReqParams } from 'store/reducers/album/browse'
 import detail from 'store/reducers/album/detail'
 import {
@@ -18,7 +24,8 @@ import {
   FETCH_ALBUM,
   FETCH_ALBUM_PHOTOS,
   EDIT_ALBUM,
-  FETCH_EDIT_ALBUM
+  FETCH_EDIT_ALBUM,
+  DELETE_ALBUM
 } from 'store/constants'
 import {
   addMoreAlbums,
@@ -171,10 +178,19 @@ function* editAlbum({
   }
 }
 
+function* deleteAlbumSaga({ payload }: PayloadAction) {
+  yield call(deleteAlbum, payload)
+}
+
+// function* changeAlbumVisibility() {
+//   yield call()
+// }
+
 export default function*() {
   yield fork(fetchBrowse)
   yield fork(fetchDetailPhotos)
   yield takeLeading(FETCH_EDIT_ALBUM, stateful(fetchEditAlbum))
   yield takeLeading(FETCH_ALBUM, fetchDetail)
   yield takeLeading(EDIT_ALBUM, stateful(editAlbum))
+  yield takeLeading(DELETE_ALBUM, stateful(deleteAlbumSaga))
 }

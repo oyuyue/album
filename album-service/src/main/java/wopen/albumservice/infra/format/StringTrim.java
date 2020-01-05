@@ -1,4 +1,4 @@
-package wopen.albumservice.api.format;
+package wopen.albumservice.infra.format;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;

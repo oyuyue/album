@@ -30,7 +30,6 @@ const Recommend: FC = () => {
       <StatefulList
         onReload={reloadHandler}
         onLoadMore={loadMoreHandler}
-        empty={content.length === 0 && !hasMore}
         initError={status === StateableStatus.ERROR}
         done={!hasMore}
       >

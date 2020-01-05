@@ -13,7 +13,6 @@ import wopen.albumservice.exception.ResourceNotFoundException;
 import wopen.albumservice.exception.UploadFailedException;
 import wopen.albumservice.infra.i18n.Messages;
 import wopen.albumservice.properties.AppProperties;
-import wopen.albumservice.properties.UploadProperties;
 import wopen.albumservice.utils.$;
 
 import java.net.MalformedURLException;
@@ -25,11 +24,9 @@ import java.nio.file.Paths;
 @Transactional
 @Slf4j
 public class FileServiceImpl implements FileService, InitializingBean {
-    private final UploadProperties uploadProperties;
     private final Path rootLocation;
 
     public FileServiceImpl(AppProperties appProperties) {
-        this.uploadProperties = appProperties.getUpload();
         this.rootLocation = Paths.get(appProperties.getUpload().getDir());
     }
 
@@ -67,7 +64,7 @@ public class FileServiceImpl implements FileService, InitializingBean {
     }
 
     private String getResultUrl(String fileName) {
-        return $.concatUrl(uploadProperties.getUrlPrefix(), fileName);
+        return $.addUrlPrefix(fileName);
     }
 
     private String getFileExtension(String fileName) {

@@ -110,3 +110,7 @@ export function get(url: string, payload?: any): ReturnType<typeof request> {
 export function post(url: string, payload?: any): ReturnType<typeof request> {
   return request(url, 'POST', { payload })
 }
+
+export function del(url: string, payload?: any): ReturnType<typeof request> {
+  return request(url, 'POST', { payload })
+}

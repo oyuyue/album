@@ -64,7 +64,9 @@ import {
   CHANGE_LIST,
   CHANGE_LIST_STATUS,
   FETCH_USER_ALBUMS,
-  SET_USER_ALBUMS
+  SET_USER_ALBUMS,
+  DELETE_ALBUM,
+  CHANGE_ALBUM_VISIBILITY
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -108,6 +110,8 @@ export const addMoreAlbumPhotos = makePAC(ADD_MORE_ALBUM_PHOTOS)
 export const editAlbum = makePAC(EDIT_ALBUM)
 export const fetchEditAlbum = makePAC(FETCH_EDIT_ALBUM)
 export const setEditAlbum = makePAC(SET_EDIT_ALBUM)
+export const deleteAlbum = makePAC(DELETE_ALBUM)
+export const changeAlbumVisibility = makePAC(CHANGE_ALBUM_VISIBILITY)
 
 export const fetchUser = makePAC(FETCH_USER)
 export const setUser = makePAC(SET_USER)

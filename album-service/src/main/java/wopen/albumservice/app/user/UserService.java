@@ -11,13 +11,16 @@ public interface UserService {
 
     User getMyDetails();
 
-    User findUserByUsername(String id);
+    User getUserByUsername(String username);
 
     void updateUser(UpdateUserCommand command);
+
+    String getCurrentUsername();
 
     User getCurrentUser();
 
     void changePassword(ChangePasswordCommand command);
+
     void changePassword(String password);
 
     User signUp(String email, String password);

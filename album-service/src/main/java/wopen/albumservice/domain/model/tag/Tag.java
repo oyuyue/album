@@ -1,6 +1,7 @@
 package wopen.albumservice.domain.model.tag;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.logging.log4j.util.Strings;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @ToString
+@Getter
 @Entity
 @Table(name = "Tags")
 @NaturalIdCache

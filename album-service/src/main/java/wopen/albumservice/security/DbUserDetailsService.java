@@ -22,6 +22,6 @@ public class DbUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         wopen.albumservice.domain.model.user.User user = userService.findUserByEmail(username).orElseThrow(() -> new UsernameNotFoundException(Messages.USER_NOT_FOUND));
 
-        return new User(username, user.getPassword(), user.getEnabled(), true, true, !user.getLocked(), new ArrayList<>());
+        return new User(user.getUsername(), user.getPassword(), user.getEnabled(), true, true, !user.getLocked(), new ArrayList<>());
     }
 }

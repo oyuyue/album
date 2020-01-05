@@ -1,14 +1,26 @@
 package wopen.albumservice.utils;
 
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
+import wopen.albumservice.properties.AppProperties;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.UUID;
 
-public final class $ {
-    private $() {
+@Component
+public class $ implements InitializingBean {
+    private static String urlPrefix;
+    private final AppProperties appProperties;
+
+    public $(AppProperties appProperties) {
+        this.appProperties = appProperties;
+    }
+
+    public static String addUrlPrefix(String url) {
+        if (Strings.isBlank(url) || urlPrefix == null) return url;
+        if (url.startsWith("/")) url = url.substring(1);
+        return urlPrefix + url;
     }
 
     public static String uuidString() {
@@ -31,13 +43,6 @@ public final class $ {
         return Paths.get(url).getFileName().toString();
     }
 
-    public static String concatUrl(String... urls) {
-        return Arrays.stream(urls).filter(Objects::nonNull).reduce("", (a, b) -> {
-            if (Strings.isNotBlank(a) && !a.endsWith("/")) a += "/";
-            return a + b;
-        });
-    }
-
     public static String maskEmail(String email) {
         if (email == null || Strings.isBlank(email)) return "";
         String[] prices = email.split("@");
@@ -46,5 +51,13 @@ public final class $ {
         if (Strings.isBlank(h)) return email;
         if (h.length() == 1) h += h;
         return h.substring(0, 2) + "*****" + h.charAt(h.length() - 1) + "@" + prices[1];
+    }
+
+    @Override
+    public void afterPropertiesSet() {
+        $.urlPrefix = appProperties.getUpload().getUrlPrefix();
+        if ($.urlPrefix != null && !$.urlPrefix.endsWith("/")) {
+            $.urlPrefix += "/";
+        }
     }
 }

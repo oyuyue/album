@@ -1,16 +1,15 @@
-import React, { FC, memo, ReactNode } from 'react'
+import React, { FC, memo, ReactNode, useCallback } from 'react'
 import ErrorReload, { ErrorReloadProps } from 'components/ErrorReload'
 import Loading, { LoadingProps } from 'components/Loading'
 import Result from 'components/Result'
-import Divider from 'components/Divider'
 
 interface StatefulListProps {
   onReload?: ErrorReloadProps['onReload']
   onLoadMore?: LoadingProps['onLoadMore']
   initError?: boolean
+  empty?: boolean
   error?: boolean
   done?: boolean
-  empty?: boolean
   children?: ReactNode
 }
 
@@ -23,18 +22,20 @@ const StatefulList: FC<StatefulListProps> = ({
   initError,
   onLoadMore
 }) => {
+  const render = useCallback(() => {
+    if (!initError) {
+      if (error) return <Loading error={error} onLoadMore={onLoadMore} />
+      if (done && empty) return <Result type="empty" subTitle="暂无数据" />
+      if (done) return null
+      return <Loading error={error} onLoadMore={onLoadMore} />
+    }
+  }, [done, empty, error, initError, onLoadMore])
+
   return (
     <div>
       {initError && <ErrorReload onReload={onReload} />}
       {children}
-      {!initError &&
-        (empty ? (
-          <Result type="empty" subTitle="暂无数据" />
-        ) : done ? (
-          <Divider>到底了</Divider>
-        ) : (
-          <Loading error={error} onLoadMore={onLoadMore} />
-        ))}
+      {render()}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 package wopen.albumservice.app.user;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         return userRepo.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 
@@ -47,9 +49,14 @@ public class UserServiceImpl implements UserService {
         userRepo.save(user);
     }
 
+    @Override
+    public String getCurrentUsername() {
+        return WebContextHolder.getCurrentUser().orElseThrow(AuthException::new).getUsername();
+    }
+
+    @Override
     public User getCurrentUser() {
-        String email = WebContextHolder.getCurrentUser().orElseThrow(AuthException::new).getUsername();
-        return userRepo.findByEmail(email).orElseThrow(UserNotFoundException::new);
+        return userRepo.findByUsername(getCurrentUsername()).orElseThrow(UserNotFoundException::new);
     }
 
     @Override

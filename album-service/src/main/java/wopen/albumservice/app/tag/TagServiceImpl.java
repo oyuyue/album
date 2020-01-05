@@ -6,6 +6,9 @@ import wopen.albumservice.domain.model.tag.Tag;
 import wopen.albumservice.domain.model.tag.TagRepo;
 import wopen.albumservice.domain.model.tag.UpsertTagCommand;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 @Transactional
 public class TagServiceImpl implements TagService {
@@ -29,5 +32,16 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag createTag(String name) {
         return createTag(name, null);
+    }
+
+    @Override
+    public List<Tag> findByNames(List<String> names) {
+        if (names == null || names.size() == 0) return Collections.emptyList();
+        return tagRepo.findAllByNames(names);
+    }
+
+    @Override
+    public List<Tag> getAllTags() {
+        return tagRepo.findAll();
     }
 }

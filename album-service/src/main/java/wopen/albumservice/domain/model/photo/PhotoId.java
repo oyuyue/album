@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
-import wopen.albumservice.domain.shared.Utils;
+import wopen.albumservice.utils.$;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -23,7 +23,7 @@ public class PhotoId implements Serializable {
     }
 
     public static PhotoId next() {
-        return new PhotoId(Utils.uuidString());
+        return new PhotoId($.uuidString());
     }
 
     @Override
@@ -37,5 +37,9 @@ public class PhotoId implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(photoId);
+    }
+
+    public String id() {
+        return photoId;
     }
 }

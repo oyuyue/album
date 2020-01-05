@@ -54,13 +54,13 @@ export interface Photo {
 
 export interface Album {
   id?: string
+  albumId?: string
   imageUrl?: string
   personal?: boolean
   title?: string
   createdTime?: number
   updatedTime?: number
   photoCount?: number
-  categories?: Category[]
   photos?: Photo[]
   user?: User
 }

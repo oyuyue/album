@@ -5,7 +5,6 @@ import Input from 'components/Input'
 import PersonalSwitch from 'components/PersonalSwitch'
 import useForm from 'hooks/useForm'
 import { fileToUrl } from 'utils'
-import './index.scss'
 import { RouteComponentProps } from 'react-router-dom'
 import useShallowSelector from 'hooks/useShallowSelector'
 import { isLoading } from 'store/reducers/state'
@@ -13,6 +12,7 @@ import { EDIT_ALBUM } from 'store/constants'
 import { selectEditAlbum } from 'store/reducers/album/edit'
 import { useDispatch } from 'react-redux'
 import { editAlbum, fetchEditAlbum } from 'store/actions'
+import './index.scss'
 
 type img = { file?: File; url?: string }
 

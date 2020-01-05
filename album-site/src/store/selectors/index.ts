@@ -1,4 +1,12 @@
 import { RootState } from 'store/reducers'
+import { User } from 'types/entity'
 
-export const routerPathnameSelector = (state: RootState) =>
-  state.router.location.pathname
+export default function selectUserDetails({
+  account: { details: myDetails, logged },
+  user: { details }
+}: RootState): User & { logged?: boolean } {
+  if (logged && myDetails.username === details.username) {
+    return { ...myDetails, logged: true }
+  }
+  return details
+}

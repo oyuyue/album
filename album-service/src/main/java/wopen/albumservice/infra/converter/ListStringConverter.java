@@ -1,4 +1,4 @@
-package wopen.albumservice.api.converter;
+package wopen.albumservice.infra.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

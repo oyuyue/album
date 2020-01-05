@@ -1,6 +1,7 @@
 package wopen.albumservice.domain.model.album;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.Cache;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "Albums")
 @NaturalIdCache
+@Getter
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Album implements Serializable {
@@ -36,7 +38,7 @@ public class Album implements Serializable {
     @Embedded
     private Audit audit = new Audit();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     public Album(UpsertAlbumCommand command, User user) {
@@ -68,5 +70,10 @@ public class Album implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(albumId);
+    }
+
+    public void changeVisibility(Boolean personal) {
+        if (personal == null) return;
+        this.personal = personal;
     }
 }

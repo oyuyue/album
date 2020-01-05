@@ -1,4 +1,4 @@
-import { get, post } from 'utils/request'
+import { get, post, del } from 'utils/request'
 
 export const fetchBanners = () => get('/banners')
 export const fetchTags = () => get('/tags')
@@ -9,11 +9,12 @@ export const fetchAlbums = (payload?: any) => get('/albums', payload)
 export const search = (payload?: any) => get('/search', payload)
 export const fetchAlbum = (id: string) => get('/albums/' + id)
 export const upsertAlbum = (payload?: any) => post('/albums', payload)
+export const deleteAlbum = (id: string) => del(`/albums/${id}`)
+export const changeAlbumVisibility = (payload: any) =>
+  post('/albums/actions/change-visibility', payload)
 export const fetchUser = (id: string) => get('/users/' + id)
-export const fetchUserPhotos = (uId: string, payload?: any) =>
-  get(`/users/${uId}/photos`, payload)
-export const fetchUserAlbums = (uId: string, payload?: any) =>
-  get(`/users/${uId}/albums`, payload)
+export const fetchUserPhotos = (payload?: any) => get('/photos', payload)
+export const fetchUserAlbums = (payload?: any) => get('/albums', payload)
 export const fetchToken = () => get('/token')
 export const fetchMyDetails = () => get('/users/me')
 export const updateMyProfile = (payload: any) => post('/users', payload)

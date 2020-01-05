@@ -25,4 +25,12 @@ public class UserDto {
     public String getEmail() {
         return $.maskEmail(email);
     }
+
+    public String getAvatarUrl() {
+        return $.addUrlPrefix(avatarUrl);
+    }
+
+    public String getBannerUrl() {
+        return $.addUrlPrefix(bannerUrl);
+    }
 }

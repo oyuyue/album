@@ -1,6 +1,7 @@
 package wopen.albumservice.domain.model.phototag;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import wopen.albumservice.domain.model.photo.Photo;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @ToString
+@Getter
 @Entity
 @Table(name = "Photo_Tags")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,6 +27,11 @@ public class PhotoTag implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("tag_id")
     private Tag tag;
+
+    public PhotoTag(Photo photo, Tag tag) {
+        this.photo = photo;
+        this.tag = tag;
+    }
 
     @Override
     public boolean equals(Object o) {

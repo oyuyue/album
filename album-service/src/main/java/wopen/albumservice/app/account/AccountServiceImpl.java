@@ -11,7 +11,7 @@ import wopen.albumservice.domain.model.user.RetrievePasswordCommand;
 import wopen.albumservice.domain.model.user.SignUpCommand;
 import wopen.albumservice.exception.CaptchaExistException;
 import wopen.albumservice.exception.WrongCaptchaException;
-import wopen.albumservice.messaging.EmailSender;
+import wopen.albumservice.infra.messaging.EmailSender;
 
 import java.time.Duration;
 
