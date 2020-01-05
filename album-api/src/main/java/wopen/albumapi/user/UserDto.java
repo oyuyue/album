@@ -17,7 +17,6 @@ public class UserDto {
     private String bannerUrl;
     private Instant joinedAt;
     private long photoCount;
-    private long albumCount;
     private long likeCount;
     private long viewedCount;
     private long likedCount;

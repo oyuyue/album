@@ -15,8 +15,6 @@ import javax.persistence.Embeddable;
 public class UserStats {
     @Formula("(select count(1) from Photos p where p.user_id = id)")
     private long photoCount = 0L;
-    @Formula("(select count(1) from Albums a where a.user_id = id)")
-    private long albumCount = 0L;
     @Formula("(select count(1) from Photo_Likes pl where pl.user_id = id)")
     private long likeCount = 0L;
     @Formula("(select coalesce(sum(p.views),0) from Photos p where p.user_id = id)")

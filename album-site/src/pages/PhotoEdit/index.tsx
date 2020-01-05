@@ -8,10 +8,10 @@ import Switch from 'components/Switch'
 import Checkbox from 'components/Checkbox'
 import Upload from 'components/Upload'
 import ImageFilter from 'components/ImageFilter'
-import './index.scss'
 import filters from 'components/ImageFilter/filters'
+import './index.scss'
 
-const EditPhoto: FC = () => {
+const PhotoEdit: FC = () => {
   const canvas = useRef<HTMLCanvasElement>()
   const image = useRef<any>()
   const [filter, setFilter] = useState('')
@@ -123,4 +123,4 @@ const EditPhoto: FC = () => {
   )
 }
 
-export default memo(EditPhoto)
+export default memo(PhotoEdit)

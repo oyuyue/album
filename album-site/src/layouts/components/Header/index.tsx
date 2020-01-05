@@ -50,9 +50,6 @@ const Header: FC = () => {
                 <Item to="/edit/photos" icon="image">
                   上传图片
                 </Item>
-                <Item to="/edit/albums" icon="folder-plus">
-                  新增相册
-                </Item>
               </Menu>
             }
             horizontal="right"

@@ -11,7 +11,7 @@ import Details from 'pages/Details'
 import User from 'pages/User'
 import Search from 'pages/Search'
 import LoginAndSignUp from 'pages/LoginAndSignUp'
-import Upload from 'pages/Upload'
+import PhotoEdit from 'pages/PhotoEdit'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import CachedSwitch from './components/CachedSwitch'
@@ -36,7 +36,7 @@ const Layout: FC = () => {
           <Route path="/photos/:id" renderPrev component={Details} />
           <Route path="/users/:id/:type?" component={User} />
           <Route path="/search/:type?" component={Search} />
-          <Route path="/upload/:type/:id?" renderPrev component={Upload} />
+          <Route path="/edit/photos/:id?" renderPrev component={PhotoEdit} />
           <Route path="/account/:type" renderPrev component={LoginAndSignUp} />
         </CachedSwitch>
       </div>
