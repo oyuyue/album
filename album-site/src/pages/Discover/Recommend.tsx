@@ -42,7 +42,7 @@ const Recommend: FC = () => {
               title={x.title}
               imgUrl={x.imageUrl}
               meta={[x.views + '次查看']}
-              createdAt={x.createdTime}
+              createdAt={x.createdAt}
               userId={x.user.id}
               avatarUrl={x.user.avatarUrl}
               nickname={x.user.nickname}

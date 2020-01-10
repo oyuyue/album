@@ -45,7 +45,8 @@ import {
   FETCH_USER_PHOTOS,
   SET_USER_PHOTOS,
   FETCH_EDIT_PHOTO,
-  SET_EDIT_PHOTO
+  SET_EDIT_PHOTO,
+  EDIT_PHOTO
 } from '../constants'
 
 export const fetchBanners = makeAC(FETCH_BANNERS)
@@ -65,6 +66,7 @@ export const fetchUserPhotos = makeLAC(FETCH_USER_PHOTOS)
 export const setUserPhotos = makeLAC(SET_USER_PHOTOS)
 export const fetchEditPhoto = makePAC(FETCH_EDIT_PHOTO)
 export const setEditPhoto = makePAC(SET_EDIT_PHOTO)
+export const editPhoto = makePAC(EDIT_PHOTO)
 
 export const fetchTags = makeAC(FETCH_TAGS)
 export const setTags = makePAC(SET_TAGS)

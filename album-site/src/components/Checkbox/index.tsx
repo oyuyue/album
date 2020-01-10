@@ -1,17 +1,17 @@
-import React, { FC, memo, HTMLAttributes } from 'react'
+import React, { FC, memo, InputHTMLAttributes } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import clsx from 'clsx'
 import Typography from 'components/Typography'
 import './index.scss'
 
-interface CheckboxProps extends HTMLAttributes<HTMLElement> {
+interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string | number
 }
 
 const Checkbox: FC<CheckboxProps> = ({ label, color, className, ...rest }) => {
   return (
-    <label {...rest} className="checkbox">
-      <input type="checkbox" />
+    <label className="checkbox">
+      <input {...rest} type="checkbox" />
       <div
         className={clsx(
           'checkbox_inner',

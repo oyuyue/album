@@ -47,8 +47,10 @@ export interface Photo {
   title?: string
   views?: number
   stars?: number
-  createdTime?: number
-  updatedTime?: number
+  createdAt?: number
+  updatedAt?: number
   user?: User
   tags?: Tag[]
+  originImageUrl?: string
+  imageFilterType?: string
 }
